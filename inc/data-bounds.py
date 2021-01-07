@@ -20,7 +20,20 @@ pbf = result.stdout
 
 pbf_json = json.loads(pbf)
 
-bbox = pbf_json['header']['boxes'][0]
+try:
+    bbox = pbf_json['header']['boxes'][0]
+
+except:
+    print("Failed to read bounding box from file headers, falling back on searching all points in the file")
+
+    result = subprocess.run(['osmium', 'fileinfo', '-e', '-j', pbf_file], stdout=subprocess.PIPE)
+
+    pbf = result.stdout
+
+    pbf_json = json.loads(pbf)
+
+    bbox = pbf_json['data']['bbox']
+
 
 
 with open("bbox.wkt", 'w') as f:
