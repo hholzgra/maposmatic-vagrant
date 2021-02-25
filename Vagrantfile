@@ -36,13 +36,18 @@ Vagrant.configure(2) do |config|
   end
   config.disksize.size = '150GB'
 
+  unless Vagrant.has_plugin?("vagrant-env")
+    raise 'env plugin is not installed - run "vagrant plugin install vagrant-env" first'
+  end
+  config.env.enable
+
   config.ssh.forward_x11=true
 
   config.vm.provision "shell",
     env: {
-      "GIT_AUTHOR_NAME":  "#{ENV['GIT_AUTHOR_NAME']}",
-      "GIT_AUTHOR_EMAIL": "#{ENV['GIT_AUTHOR_EMAIL']}"
+      "GIT_AUTHOR_NAME":  ENV['GIT_AUTHOR_NAME'],
+      "GIT_AUTHOR_EMAIL": ENV['GIT_AUTHOR_EMAIL']
     },
     path: "provision.sh"
-  
+
 end

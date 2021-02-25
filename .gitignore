@@ -1,3 +1,4 @@
+.env
 *.gem
 *.rbc
 /.config
@@ -61,6 +62,6 @@ files/shapefiles
 
 # editor backup file patterns
 *~
-.*.swp 
+.*.swp
 \#*#
 
