@@ -20,6 +20,8 @@ fi
 FILEDIR=/vagrant/files
 INCDIR=/vagrant/inc
 
+. $INCDIR/resize-part-and-fs.sh
+
 if touch /vagrant/can_write_here
 then
 	CACHEDIR=/vagrant/cache
@@ -128,7 +130,7 @@ banner "building osm2pgsql"
 banner "building phyghtmap" # needed by OpenTopoMap
 . $INCDIR/from-source/phyghtmap.sh
 
-banner "db import" 
+banner "db import"
 . $INCDIR/osm2pgsql-import.sh
 
 banner "get bounds"
@@ -145,7 +147,7 @@ banner "locales"
 
 #----------------------------------------------------
 #
-# Set up various stylesheets 
+# Set up various stylesheets
 #
 #----------------------------------------------------
 
