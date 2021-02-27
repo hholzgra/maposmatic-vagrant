@@ -1,13 +1,16 @@
 #----------------------------------------------------
 #
-# Set up PostgreSQL and PostGIS 
+# Set up PostgreSQL and PostGIS
 #
 #----------------------------------------------------
 
 # config tweaks
 # TODO how to auto-detect correct conf include dir?
-let Mem_1_3=$MemTotal/3
-let Mem_2_3=2*$MemTotal/3
+# Keep for OS some free memory to prevent killing PostgreSQL by Out-Of-Memory Killer
+let Mem_OS=100000
+let Mem_DB=$MemTotal-$Mem_OS
+let Mem_1_3=$Mem_DB/3
+let Mem_2_3=2*$Mem_DB/3
 sed -e"s/#Mem_1_3#/$Mem_1_3/g" -e"s/#Mem_2_3#/$Mem_2_3/g" </vagrant/files/config-files/postgresql-extra.conf >/etc/postgresql/12/main/conf.d/postgresql-extra.conf
 systemctl restart postgresql
 
@@ -17,7 +20,7 @@ sudo -u postgres createuser -g maposmatic root
 sudo -u postgres createuser -g maposmatic vagrant
 
 
-# creade database for osm2pgsql import 
+# creade database for osm2pgsql import
 sudo --user=postgres createdb --encoding=UTF8 --locale=en_US.UTF-8 --template=template0 --owner=maposmatic gis
 
 # set up PostGIS for osm2pgsql database
