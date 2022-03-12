@@ -97,6 +97,7 @@ fi
 
 # add "maposmatic" system user that will own the database and all locally installed stuff
 useradd --create-home maposmatic
+chmod a+rx /home/maposmatic
 
 # installing apt, pip and npm packages
 

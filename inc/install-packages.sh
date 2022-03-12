@@ -52,6 +52,7 @@ apt-get install --quiet=2 --assume-yes \
     fonts-sil-padauk \
     fonts-sipa-arundina \
     fonts-taml-tscu \
+    fonts-unifont \
     g++ \
     ghostscript \
     gir1.2-pango-1.0 \
@@ -76,7 +77,7 @@ apt-get install --quiet=2 --assume-yes \
     libgirepository1.0-dev \
     libkakasi2-dev \
     liblua5.3-dev \
-    libmapnik3.0 \
+    libmapnik3.1 \
     libmapnik-dev \
     libosmium2-dev \
     libpython3-dev \
@@ -90,12 +91,13 @@ apt-get install --quiet=2 --assume-yes \
     munin \
     munin-node \
     munin-plugins-extra \
+    npm \
     osmctools \
     osmium-tool \
     pandoc \
     php-cli \
     php-http-request2 \
-    php7.4-xml \
+    php8.1-xml \
     pngquant \
     poedit \
     postgis \
@@ -134,7 +136,6 @@ apt-get install --quiet=2 --assume-yes \
     transifex-client \
     tree \
     ttf-mscorefonts-installer \
-    ttf-unifont \
     unifont \
     unifont-bin \
     unzip \
@@ -150,6 +151,7 @@ pip3 install \
      colour \
      django-cookie-law \
      django-maintenance-mode \
+     django-multiupload \
      fastnumbers \
      geoalchemy2 \
      geopy \
@@ -166,9 +168,6 @@ pip3 install \
      utm \
      > /dev/null || exit 3
 
-# pip repository version of django-multiupload not compatible with Django 2.1+ yet
-pip3 install -e git+https://github.com/Chive/django-multiupload.git#egg=multiupload > /dev/null || exit 3
-
 # we can't uninstall the Ubuntu python3-pycairo package
 # due to too many dependencies, but we need to make sure
 # that we actually use the current pip pacakge to get
@@ -183,11 +182,7 @@ gem install --pre asciidoctor-pdf > /dev/null || exit 3
 
 # install extra npm packages
 banner "npm packages"
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
 npm config set loglevel warn
-
 npm install -g carto > /dev/null || exit 3
 
 # download / install extra fonts
