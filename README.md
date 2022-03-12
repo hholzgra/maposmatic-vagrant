@@ -1,6 +1,9 @@
 # maposmatic-vagrant
 
-Performs a full MapOsMatic installation in an Ubuntu "Bionic" 18.04LTS VM using Vagrant and shell provisioning
+Performs a full MapOsMatic installation in an Ubuntu "Jammy" 22.04LTS VM using Vagrant and shell provisioning
+
+WARNING: currently not fully working due to libmapnik3.1 not being built
+against the Proj library in "Jammy" due to version incompatibilities :(
 
 ## Table of contents
 
