@@ -44,6 +44,7 @@ apt-get install --quiet=2 --assume-yes \
     fonts-sil-padauk \
     fonts-sipa-arundina \
     fonts-taml-tscu \
+    fonts-unifont \
     g++ \
     ghostscript \
     gir1.2-pango-1.0 \
