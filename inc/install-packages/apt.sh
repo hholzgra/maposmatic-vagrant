@@ -69,7 +69,7 @@ apt-get install --quiet=2 --assume-yes \
     libgirepository1.0-dev \
     libkakasi2-dev \
     liblua5.3-dev \
-    libmapnik3.0 \
+    libmapnik3.1 \
     libmapnik-dev \
     libosmium2-dev \
     libpython3-dev \
@@ -83,14 +83,14 @@ apt-get install --quiet=2 --assume-yes \
     munin \
     munin-node \
     munin-plugins-extra \
+    npm \
     osmctools \
     osmium-tool \
     pandoc \
     parallel \
     php-cli \
-    php-http-request2 \
-    php7.4-pgsql \
-    php7.4-xml \
+    php8.1-pgsql \
+    php8.1-xml \
     pigz \
     pngquant \
     poedit \
@@ -117,10 +117,12 @@ apt-get install --quiet=2 --assume-yes \
     python3-pip \
     python3-pil \
     python3-psycopg2 \
+    python3-requests \
     python3-shapely \
     python3-slugify \
     python3-urllib3 \
     python3-virtualenv \
+    python3-yaml \
     redis \
     subversion \
     sysvbanner \
@@ -128,9 +130,7 @@ apt-get install --quiet=2 --assume-yes \
     texlive-latex-base \
     texlive-latex-recommended \
     time \
-    transifex-client \
     tree \
-    ttf-unifont \
     unifont \
     unifont-bin \
     unzip \
