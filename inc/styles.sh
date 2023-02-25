@@ -6,7 +6,7 @@ STYLEDIR=$INSTALLDIR/styles
 
 # hard coded version for now instead of $(mapnik-config -v)
 # as carto does not support mapnik v3.1 yet (and maybe never will?)
-MAPNIK_VERSION_FOR_CARTO=3.0.23 
+export MAPNIK_VERSION_FOR_CARTO=3.0.23 
 
 #----------------------------------------------------
 #

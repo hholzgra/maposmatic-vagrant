@@ -13,7 +13,7 @@ sudo -u maposmatic psql gis < sql/get_station_importance.sql
 for carto_style in *.mml
 do
 	mapnik_style=$(basename $carto_style .mml).xml
-	carto -a $(MAPNIK_VERSION_FOR_CARTO) --quiet $carto_style  > $mapnik_style
+	carto -a $MAPNIK_VERSION_FOR_CARTO --quiet $carto_style  > $mapnik_style
         php $FILEDIR/tools/postprocess-style.php $mapnik_style
 done
 

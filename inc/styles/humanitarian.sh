@@ -19,7 +19,7 @@ sed -e"s|layer \~|tags->'layer' \~|g" \
     -e's|file:.*/simplified-land-polygons-complete-3857.zip|file: '$SHAPEFILE_DIR'/simplified-land-polygons-complete-3857/simplified_land_polygons.shp|g' \
     < project.yml > project.mml
 
-carto -q -a $(MAPNIK_VERSION_FOR_CARTO) project.mml > osm.xml
+carto -q -a $MAPNIK_VERSION_FOR_CARTO project.mml > osm.xml
 
 # -e's|user: hot|user: maposmatic|g' \
 
