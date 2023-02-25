@@ -11,6 +11,6 @@ cd OSM-Swiss-Style
 ln -s $SHAPEFILE_DIR data
 
 sed '/\sname:/d' < project.mml > osm.mml
-carto -a $(mapnik-config -v) --quiet osm.mml > osm.xml
+carto -a $(MAPNIK_VERSION_FOR_CARTO) --quiet osm.mml > osm.xml
 php $FILEDIR/tools/postprocess-style.php osm.xml
 

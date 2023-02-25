@@ -16,5 +16,5 @@ ln -s $SHAPEFILE_DIR data
 sed -i '/"name":/d' project.mml
 
 # convert CartoCSS to Mapnil XML
-carto -q -a $(mapnik-config -v) project.mml > osm.xml
+carto -q -a $(MAPNIK_VERSION_FOR_CARTO) project.mml > osm.xml
 

@@ -34,6 +34,6 @@ sed -e '/\sname:/d' \
     -e 's/dbname:.*/dbname: "gis"/' \
 < project.mml > osm.mml
 
-carto -q -a $(mapnik-config -v) --quiet osm.mml > osm.xml
+carto -q -a $(MAPNIK_VERSION_FOR_CARTO) --quiet osm.mml > osm.xml
 php $FILEDIR/tools/postprocess-style.php osm.xml
 

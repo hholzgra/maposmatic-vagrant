@@ -22,7 +22,7 @@ sed -e 's/dbname: "osm"/dbname: "gis"/g' \
     -e 's/layer~/layer::text~/g' \
     < project.mml > cyclosm.mml
 
-carto -a $(mapnik-config -v) --quiet cyclosm.mml > cyclosm.xml
+carto -a $(MAPNIK_VERSION_FOR_CARTO) --quiet cyclosm.mml > cyclosm.xml
 php $FILEDIR/tools/postprocess-style.php cyclosm.xml
 
 # style expects contours table under a different name, and ele column with different type

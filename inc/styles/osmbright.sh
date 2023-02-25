@@ -14,5 +14,5 @@ cp $FILEDIR/config-files/osmbright-configure.py configure.py
 
 cd OSMBright
 sed '/"name":/d' < project.mml > osm.mml
-carto -q -a $(mapnik-config -v) osm.mml  > osm.xml
+carto -q -a $(MAPNIK_VERSION_FOR_CARTO) osm.mml  > osm.xml
 
