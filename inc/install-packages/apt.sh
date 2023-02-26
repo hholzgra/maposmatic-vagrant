@@ -83,6 +83,7 @@ apt-get install --quiet=2 --assume-yes \
     munin \
     munin-node \
     munin-plugins-extra \
+    node-carto \
     npm \
     osmctools \
     osmium-tool \
@@ -138,3 +139,9 @@ apt-get install --quiet=2 --assume-yes \
     wkhtmltopdf \
     > /dev/null || exit 3
 
+echo <<EOF > /usr/local/bin/carto
+#! /bin/bash
+/usr/bin/carto --no-deprecation "$@" 
+EOF
+
+chmod a+x /usr/local/bin/carto
