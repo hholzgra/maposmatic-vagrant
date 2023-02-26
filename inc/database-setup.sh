@@ -15,6 +15,7 @@ sed -e"s/#Mem_1_5#/$Mem_1_5/g" -e"s/#Mem_1_10#/$Mem_1_10/g" < $FILEDIR/config-fi
 systemctl restart postgresql
 
 # add "gis" database users
+usermod -a -G vagrant postgres 
 sudo --user=postgres createuser --superuser --no-createdb --no-createrole maposmatic
 sudo -u postgres createuser -g maposmatic root
 sudo -u postgres createuser -g maposmatic vagrant
