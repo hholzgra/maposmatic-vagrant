@@ -88,11 +88,13 @@ do
     fi
 done
 
-parallel < jobs-adapted.txt
-parallel < jobs-warped.txt
-parallel < jobs-hillshade.txt
+for job in adapted warped hillshade
+do
+    jobfile=jobs-$job.txt
+    test -f $jobfile && parallel < $jobfile
+done
 
-rm jobs-*.txt
+rm -f jobs-*.txt
 
 cp --update *.tif $CACHEDIR/srtm/
 
