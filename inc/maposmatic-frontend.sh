@@ -8,7 +8,7 @@
 cd $INSTALLDIR
 git clone --quiet https://github.com/hholzgra/maposmatic.git
 cd maposmatic
-git checkout --quiet site-osm-baustelle
+git checkout --quiet django-3.2
 
 git remote add pushme git@github.com:hholzgra/maposmatic.git
 
