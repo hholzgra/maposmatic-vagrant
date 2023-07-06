@@ -5,29 +5,14 @@
 
 banner "python packages"
 pip3 install \
-     babel \
-     colour \
-     cssselect \
      django-cookie-law \
-     django-maintenance-mode \
      django-multiupload \
      fastnumbers \
-     geoalchemy2 \
-     geopy \
-     gpxpy \
-     jinja2 \
      jsonpath_ng \
-     natsort \
      osmium \
      pillow \
-     pluginbase \
-     psutil \
-     pyproj \
-     qrcode \
      "sqlalchemy>=1.4,<2.0" \
      "sqlalchemy-utils" \
-     tinycss \
-     utm \
      >/dev/null || exit 3
 
 # pip repository version of django-multiupload not compatible with Django 2.1+ yet

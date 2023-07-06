@@ -103,24 +103,39 @@ apt-get --quiet install --assume-yes \
     postgresql-server-dev-all \
     pv \
     python3-appdirs \
+    python3-babel \
+    python3-colour \
+    python3-cssselect \
     python3-distlib \
     python3-django \
+    python3-django-maintenance-mode \
+    python3-django
     python3-filelock \
     python3-future \
     python3-feedparser \
     python3-fiona \
     python3-gdal \
     python3-gdbm \
+    python3-geoalchemy2 \
+    python3-geopy \
     python3-gi-cairo \
+    python3-gpxpy \
+    python3-inja2 \
     python3-lxml \
     python3-mako \
     python3-mapnik \
     python3-markdown \
+    python3-natsort \
     python3-pip \
     python3-pil \
+    python3-pluginbase \
+    python3-psutil \
     python3-psycopg2 \
+    python3-pyproj \
+    python3-qrcode \
     python3-shapely \
     python3-slugify \
+    python3-tinycss \
     python3-urllib3 \
     python3-virtualenv \
     redis \
@@ -131,9 +146,7 @@ apt-get --quiet install --assume-yes \
     texlive-latex-base \
     texlive-latex-recommended \
     time \
-    transifex-client \
     tree \
-    ttf-unifont \
     unifont \
     unifont-bin \
     unzip \
