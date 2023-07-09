@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
   unless Vagrant.has_plugin?("vagrant-disksize")
     raise 'disksize plugin is not installed - run "vagrant plugin install vagrant-disksize" first'
   end
-  config.disksize.size = '1000GB'
+  config.disksize.size = '150GB'
 
   if Vagrant.has_plugin?("vagrant-env")
     config.env.enable
