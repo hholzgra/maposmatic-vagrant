@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "debian/bullseye64"
+  config.vm.box = "debian/bookworm64"
 
   config.vm.network "forwarded_port", guest: 80, host: 8000
 
