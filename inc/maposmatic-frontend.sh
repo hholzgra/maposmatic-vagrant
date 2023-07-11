@@ -6,13 +6,14 @@
 
 # get maposmatic web frontend
 cd $INSTALLDIR
+rm -rf maposmatic
 git clone --quiet https://github.com/hholzgra/maposmatic.git
 cd maposmatic
 git checkout --quiet django-3.2
 
 git remote add pushme git@github.com:hholzgra/maposmatic.git
 
-
+. $INSTALLDIR/virtual-env/bin/activate
 
 # install dependencies
 (cd www/static; HOME=/root npm install)

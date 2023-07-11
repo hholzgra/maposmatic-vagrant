@@ -12,13 +12,15 @@ fi
 
 cd $STYLEDIR/
 
-pip3 install  git+https://github.com/waymarkedtrails/osgende@master \
-	      git+https://github.com/waymarkedtrails/waymarkedtrails-shields@master
 
 git clone  https://github.com/waymarkedtrails/waymarkedtrails-backend
 
 cd waymarkedtrails-backend
 
+. $INSTALLDIR/virtual-env/bin/activate
+
+pip3 install  git+https://github.com/waymarkedtrails/osgende@master \
+	      git+https://github.com/waymarkedtrails/waymarkedtrails-shields@master
 pip3 install .
 
 mkdir symbols

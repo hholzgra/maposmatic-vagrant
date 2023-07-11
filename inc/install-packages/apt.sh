@@ -87,6 +87,7 @@ apt-get --quiet install --assume-yes \
     munin \
     munin-node \
     munin-plugins-extra \
+    nlohmann-json3-dev \
     osmctools \
     osmium-tool \
     pandoc \
@@ -102,6 +103,7 @@ apt-get --quiet install --assume-yes \
     postgresql-contrib \
     postgresql-server-dev-all \
     pv \
+    python-is-python3 \
     python3-appdirs \
     python3-babel \
     python3-colour \
@@ -109,7 +111,6 @@ apt-get --quiet install --assume-yes \
     python3-distlib \
     python3-django \
     python3-django-maintenance-mode \
-    python3-django
     python3-filelock \
     python3-future \
     python3-feedparser \
@@ -120,7 +121,7 @@ apt-get --quiet install --assume-yes \
     python3-geopy \
     python3-gi-cairo \
     python3-gpxpy \
-    python3-inja2 \
+    python3-jinja2 \
     python3-lxml \
     python3-mako \
     python3-mapnik \
@@ -137,6 +138,7 @@ apt-get --quiet install --assume-yes \
     python3-slugify \
     python3-tinycss \
     python3-urllib3 \
+    python3-venv \
     python3-virtualenv \
     redis \
     renderd \
