@@ -5,7 +5,7 @@ cd $STYLEDIR
 git clone --quiet https://github.com/cyclosm/cyclosm-cartocss-style
 cd cyclosm-cartocss-style
 
-git checkout v0.6.0
+git checkout v0.6
 
 patch -p1 < $STYLEDIR/cyclosm.patch
 
