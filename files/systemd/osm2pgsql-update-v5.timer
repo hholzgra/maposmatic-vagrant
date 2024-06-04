@@ -1,0 +1,9 @@
+[Unit]
+Description=Fetch OSM diff files since last update and apply them to the OSM Carto v5.x PostGIS database
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

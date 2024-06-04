@@ -205,6 +205,9 @@ systemctl daemon-reload
 banner "styles"
 . $INCDIR/styles.sh
 
+banner "db import v5"
+. $INCDIR/osm2pgsql-import-v5.sh
+
 
 #----------------------------------------------------
 #
