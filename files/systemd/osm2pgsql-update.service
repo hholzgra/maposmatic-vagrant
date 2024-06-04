@@ -4,6 +4,9 @@ Wants=postgresql.service
 
 [Service]
 Type=oneshot
+Environment=INSTALLDIR=/home/maposmatic
+Environment=PYTHONPATH=/home/maposmatic/lib/@PYTHON_VERSION@/site-packages/:/usr/lib/python3/dist-packages/
+Environment=PATH=/home/maposmatic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 WorkingDirectory=@INSTALLDIR@/osm2pgsql-import
 ExecStart=@INCDIR@/osm2pgsql-update.sh
 
