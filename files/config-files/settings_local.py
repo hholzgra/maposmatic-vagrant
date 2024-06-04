@@ -87,6 +87,14 @@ DATABASES = {
         'HOST': 'gis-db',
         'PORT': '5432'
         },
+    'osm5': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'osmcarto5',
+        'USER': 'maposmatic',
+        'PASSWORD': 'secret',
+        'HOST': 'gis-db',
+        'PORT': '5432'
+        },
     'waymarked': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'planet',
