@@ -36,8 +36,11 @@ if ! test -z "$REPLICATION_BASE_URL"
 then
     echo ${REPLICATION_BASE_URL} > "${OSMOSIS_DIFFIMPORT}/baseurl.txt"
 
-    sed_opts="-e s|@INSTALLDIR@|$INSTALLDIR|g"
-    sed_opts="$sed_opts -e s|@INCDIR@|$INCDIR|g"
+    sed_opts=""
+    sed_opts+="-e s|@INSTALLDIR@|$INSTALLDIR|g "
+    sed_opts+="-e s|@INCDIR@|$INCDIR|g "
+    sed_opts+="-e s|@STYLEDIR@|$STYLEDIR|g "
+    sed_opts+="-e s|@PYTHON_VERSION@|$PYTHON_VERSION|g "
     for file in $FILEDIR/systemd/waymarked-update.*
     do
 	sed $sed_opts < $file > /etc/systemd/system/$(basename $file)

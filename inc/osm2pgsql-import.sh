@@ -72,8 +72,11 @@ then
     echo -n $REPLICATION_BASE_URL > replication_url
     echo -n $REPLICATION_SEQUENCE_NUMBER > sequence_number
 
-    sed_opts="-e s|@INSTALLDIR@|$INSTALLDIR|g"
-    sed_opts="$sed_opts -e s|@INCDIR@|$INCDIR|g"
+    sed_opts=""
+    sed_opts+="-e s|@INSTALLDIR@|$INSTALLDIR|g "
+    sed_opts+="-e s|@INCDIR@|$INCDIR|g "
+    sed_opts+="-e s|@STYLEDIR@|$STYLEDIR|g "
+    sed_opts+="-e s|@PYTHON_VERSION@|$PYTHON_VERSION|g "
     for file in $FILEDIR/systemd/osm2pgsql-update.*
     do
 	sed $sed_opts < $file > /etc/systemd/system/$(basename $file)
