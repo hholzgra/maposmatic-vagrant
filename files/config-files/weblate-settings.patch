@@ -1,0 +1,50 @@
+--- settings_example.py	2024-05-09 23:02:36.035307921 +0000
++++ settings.py	2024-05-10 08:42:15.904780742 +0000
+@@ -26,7 +26,7 @@
+ SITE_TITLE = "Weblate"
+ 
+ # Site domain
+-SITE_DOMAIN = ""
++SITE_DOMAIN = "localhost"
+ 
+ # Whether site uses https
+ ENABLE_HTTPS = False
+@@ -55,9 +55,9 @@
+         # use in case role name is different than user used for authentication.
+         # "ALTER_ROLE": "weblate",
+         # Database password.
+-        "PASSWORD": "",
++        "PASSWORD": "secret",
+         # Set to empty string for localhost.
+-        "HOST": "127.0.0.1",
++        "HOST": "gis-db",
+         # Set to empty string for default.
+         "PORT": "",
+         # Customizations for databases.
+@@ -81,7 +81,7 @@
+ 
+ # Data directory, you can use following for the development purposes:
+ # os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+-DATA_DIR = "/home/weblate/data"
++DATA_DIR = "/home/maposmatic/weblate/data"
+ 
+ # Local time zone for this installation. Choices can be found here:
+ # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+@@ -192,7 +192,7 @@
+ 
+ # Make this unique, and don't share it with anybody.
+ # You can generate it using weblate-generate-secret-key
+-SECRET_KEY = ""
++SECRET_KEY = "9c(pc$qfd^%w-m+e0n6hu7vic5&)ue#lb9bxm*g&9)2%w_40!x"
+ 
+ TEMPLATES = [
+     {
+@@ -816,7 +816,7 @@
+         # "LOCATION": "unix:///var/run/redis/redis.sock?db=1",
+         "OPTIONS": {
+             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+-            "PARSER_CLASS": "redis.connection.HiredisParser",
++            "PARSER_CLASS": "redis.connection._HiredisParser",
+             # If you set password here, adjust CELERY_BROKER_URL as well
+             "PASSWORD": None,
+             "CONNECTION_POOL_KWARGS": {},
