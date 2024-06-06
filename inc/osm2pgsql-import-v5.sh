@@ -66,7 +66,6 @@ then
     chmod 644 /etc/systemd/system/osm2pgsql-update-v5.*
     systemctl daemon-reload
     systemctl enable osm2pgsql-update-v5.timer
-    systemctl start osm2pgsql-update-v5.timer
 fi
 
 if test -z "$REPLICATION_TIMESTAMP"

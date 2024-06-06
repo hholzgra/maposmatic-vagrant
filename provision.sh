@@ -291,6 +291,8 @@ banner "running tests"
 
 banner "cleanup"
 
+. $INCDIR/start-timer-jobs.sh
+
 # write back compiler cache
 cp -rn /root/.ccache $CACHEDIR
 

@@ -49,6 +49,5 @@ then
     chmod 644 /etc/systemd/system/waymarked-update.*
     systemctl daemon-reload
     systemctl enable waymarked-update.timer
-    systemctl start waymarked-update.timer
 fi
 

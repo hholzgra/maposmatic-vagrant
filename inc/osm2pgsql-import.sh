@@ -84,7 +84,6 @@ then
     chmod 644 /etc/systemd/system/osm2pgsql-update.*
     systemctl daemon-reload
     systemctl enable osm2pgsql-update.timer
-    systemctl start osm2pgsql-update.timer
 fi
 
 if test -z "$REPLICATION_TIMESTAMP"
