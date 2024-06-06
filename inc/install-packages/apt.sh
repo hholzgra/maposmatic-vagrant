@@ -95,6 +95,7 @@ apt-get --quiet install --assume-yes \
     net-tools \
     nlohmann-json3-dev \
     ntp \
+    osm2pgsql \
     osmctools \
     osmium-tool \
     pandoc \
