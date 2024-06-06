@@ -3,7 +3,7 @@
 DBNAME=osmcarto5
 STYLENAME=openstreetmap-carto-v5
 
-DIR=$INSTALLDIR/import-osm-5
+DIR=$INSTALLDIR/osm2pgsql-import-v5
 
 STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.style
 LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua

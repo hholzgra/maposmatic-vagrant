@@ -7,7 +7,7 @@ Type=oneshot
 Environment=INSTALLDIR=/home/maposmatic
 Environment=PYTHONPATH=/home/maposmatic/lib/@PYTHON_VERSION@/site-packages/:/usr/lib/python3/dist-packages/
 Environment=PATH=/home/maposmatic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-WorkingDirectory=@INSTALLDIR@/import-osm-v5
+WorkingDirectory=@INSTALLDIR@/osm2pgsql-import-v5
 ExecStart=@INCDIR@/osm2pgsql-update-v5.sh
 
 
