@@ -100,6 +100,7 @@ apt-get --quiet install --assume-yes \
     osmium-tool \
     pandoc \
     parallel \
+    pgtop \
     php-cli \
     php-xml \
     pigz \
@@ -122,6 +123,7 @@ apt-get --quiet install --assume-yes \
     python3-virtualenv \
     redis \
     renderd \
+    strace \
     subversion \
     sysvbanner \
     texlive-extra-utils \
