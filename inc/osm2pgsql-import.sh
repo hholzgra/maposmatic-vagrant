@@ -33,7 +33,7 @@ mkdir -p $OSM_IMPORTDIR
 chown maposmatic $OSM_IMPORTDIR
 
 # import data
-time sudo --user=maposmatic osm2pgsql \
+time sudo --user=maposmatic /usr/bin/osm2pgsql \
      --create \
      --slim \
      --database=gis \
