@@ -2,7 +2,7 @@
 Description=Fetch OSM diff files since last update and apply them to the OSM Carto v5.x PostGIS database
 
 [Timer]
-OnCalendar=daily
+OnCalendar=*:02/5
 Persistent=true
 
 [Install]
