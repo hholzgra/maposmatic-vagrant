@@ -28,7 +28,7 @@ let CacheSize=$MemTotal/3072
 echo "osm2pgsql cache size: $CacheSize"
 
 # import data
-time sudo --user=maposmatic osm2pgsql \
+time sudo --user=maposmatic /usr/local/bin/osm2pgsql \
      --create \
      --slim \
      --database=$DBNAME \
