@@ -1,6 +1,16 @@
 #! /bin/bash
 
-cd $INSTALLDIR/osm2pgsql-import
+DBNAME=gis
+OSM2PGSQL=/usr/bin/osm2pgsql
+
+DIR=$INSTALLDIR/osm2pgsql-import
+
+STYLE_FILE=hstore-only.style
+LUA_FILE=openstreetmapcarto.lua
+
+FLAT_NODE_FILE=$INSTALLDIR/osm2pgsql-import/osm2pgsql-nodes.dat
+
+cd $DIR
 
 STATEFILE=sequence_number
 DIFFFILE=pyosmium.osc
@@ -23,22 +33,22 @@ then
     exit 3
 fi
 
-if sudo -u maposmatic /usr/bin/osm2pgsql \
+if sudo -u maposmatic $OSM2PGSQL \
      --append \
      --slim \
-     --database=gis \
+     --database=$DBNAME \
      --merc \
      --hstore-all \
      --cache=1000 \
      --number-processes=2 \
-     --style=hstore-only.style \
-     --tag-transform-script=openstreetmap-carto.lua \
+     --style=$STYLE_FILE \
+     --tag-transform-script=$LUA_FILE \
      --prefix=planet_osm_hstore \
-     --flat-nodes=$INSTALLDIR/osm2pgsql-import/osm2pgsql-nodes.dat \
+     --flat-nodes=$FLAT_NODE_FILE \
      $DIFFFILE 
 then
     timestamp=$(osmium fileinfo --extended --no-progress --get data.timestamp.last $DIFFFILE)
-    sudo -u maposmatic psql gis -c "update maposmatic_admin set last_update='$timestamp'"
+    sudo -u maposmatic psql $DBNAME -c "update maposmatic_admin set last_update='$timestamp'"
     rm -f $DIFFFILE
 else
     echo "OSM data import failed"

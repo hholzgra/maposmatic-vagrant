@@ -1,14 +1,16 @@
 #! /bin/bash
 
 DBNAME=osmcarto5
-STYLENAME=openstreetmap-carto-v5
+OSM2PGSQL=/usr/local/bin/osm2pgsql
 
 DIR=$INSTALLDIR/osm2pgsql-import-v5
 
+STYLENAME=openstreetmap-carto-v5
 STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.style
 LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua
 
 FLAT_NODE_FILE=$DIR/osm2pgsql-nodes.dat
+
 
 cd $DIR
 
@@ -33,7 +35,7 @@ then
     exit 3
 fi
 
-if sudo -u maposmatic /usr/local/bin/osm2pgsql \
+if sudo -u maposmatic $OSM2PGSQL \
      --append \
      --slim \
      --database=$DBNAME \
