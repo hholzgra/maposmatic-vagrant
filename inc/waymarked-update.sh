@@ -10,8 +10,11 @@ REP_SERVICE=$(cat $INSTALLDIR/osm2pgsql-import/replication_url)
 
 PROCESSES=2
 
+OPTS=""
+#OPTS="-S 5000"
+
 echo "== Main DB Update =="
-wmt-makedb db update || exit
+wmt-makedb db update $OPTS || exit
 echo
 
 for style in hiking cycling mtb riding skating slopes # running
