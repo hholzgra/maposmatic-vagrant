@@ -23,7 +23,7 @@ then
     exit 3
 fi
 
-if sudo -u maposmatic osm2pgsql \
+if sudo -u maposmatic /usr/bin/osm2pgsql \
      --append \
      --slim \
      --database=gis \
