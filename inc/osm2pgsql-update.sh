@@ -6,7 +6,7 @@ OSM2PGSQL=/usr/bin/osm2pgsql
 DIR=$INSTALLDIR/osm2pgsql-import
 
 STYLE_FILE=hstore-only.style
-LUA_FILE=openstreetmapcarto.lua
+LUA_FILE=openstreetmap-carto.lua
 
 FLAT_NODE_FILE=$INSTALLDIR/osm2pgsql-import/osm2pgsql-nodes.dat
 

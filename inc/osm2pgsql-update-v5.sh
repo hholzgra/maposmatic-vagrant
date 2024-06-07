@@ -45,7 +45,6 @@ if sudo -u maposmatic $OSM2PGSQL \
      --number-processes=2 \
      --style=$STYLE_FILE \
      --tag-transform-script=$LUA_FILE \
-     --prefix=planet_osm_hstore \
      --flat-nodes=$FLAT_NODE_FILE \
      $DIFFFILE 
 then
