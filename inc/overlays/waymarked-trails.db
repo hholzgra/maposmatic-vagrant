@@ -11,8 +11,14 @@ export SQLALCHEMY_SILENCE_UBER_WARNING=1
 
 sudo -u maposmatic dropdb --if-exists $DBNAME
 
+IMPORTDIR=$INSTALLDIR/import/waymarkedtrails
+mkdir -p $IMPORTDIR
+chown maposmatic $IMPORTDIR
+FLAT_NODE_FILE=$IMPORTDIR/flat-nodes.dat
+MAKEDB_CMD="sudo -u maposmatic -E env PATH=$PATH wmt-makedb -j $(nproc) -n $FLAT_NODE_FILE"
+
 echo "Importing main DB"
-time sudo -u maposmatic -E env PATH=$PATH wmt-makedb -j $(nproc) -f $FILE db import
+time $MAKEDB_CMD -f $FILE db import
 
 echo "Importing countries table"
 (
@@ -25,21 +31,25 @@ zcat $CACHEDIR/postgres/country_grid.sql.gz | sudo -u maposmatic psql -d $DBNAME
 sudo -u maposmatic psql -d $DBNAME -c "ALTER TABLE country_osm_grid ADD COLUMN geom geometry(Geometry,3857); UPDATE country_osm_grid SET geom=ST_Transform(geometry, 3857); ALTER TABLE country_osm_grid DROP COLUMN geometry"
 
 echo "Indexing main DB"
-sudo -u maposmatic -E env PATH=$PATH wmt-makedb $MAKEDB_CMD db prepare
+
+$MAKEDB_CMD db prepare
 
 for style in $STYLES
 do
   echo "Creating $style DB"
-  time sudo -u maposmatic -E env PATH=$PATH wmt-makedb $MAKEDB_CMD $style create
+  time $MAKEDB_CMD $style create
 
   echo "Importing $style DB"
-  time sudo -u maposmatic -E env PATH=$PATH wmt-makedb $MAKEDB_CMD -j $(nproc) $style import
+  time $MAKEDB_CMD $style import
 
   echo "Indexing $style DB"
-  time sudo -u maposmatic -E env PATH=$PATH wmt-makedb $MAKEDB_CMD -j $(nproc) $style dataview
+  time $MAKEDB_CMD $style dataview
 
   echo "Creating $style stylefile"
   wmt-makedb $style mapstyle > $style.xml
+  sed -i \
+      -e 's|<Parameter name="type">postgis</Parameter>|<Parameter name="type">postgis</Parameter><Parameter name="host">gis-db</Parameter><Parameter name="user">maposmatic</Parameter><Parameter name="password">secret</Parameter>|g' \
+      $style.xml
 done
 
 sudo -u maposmatic psql planet -c "create table waymarked_admin(last_update timestamp)"

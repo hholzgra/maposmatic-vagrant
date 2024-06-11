@@ -25,12 +25,6 @@ pip3 install .
 mkdir symbols
 chown maposmatic symbols
 
-for style in *.xml
-do
-    sed -i \
-	-e 's|<Parameter name="type">postgis</Parameter>|<Parameter name="type">postgis</Parameter><Parameter name="host">gis-db</Parameter><Parameter name="user">maposmatic</Parameter><Parameter name="password">secret</Parameter>|g' \
-	$style
-done
 
 if ! test -z "$REPLICATION_BASE_URL"
 then
