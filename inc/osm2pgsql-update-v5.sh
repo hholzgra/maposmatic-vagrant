@@ -3,14 +3,13 @@
 DBNAME=osmcarto5
 OSM2PGSQL=/usr/local/bin/osm2pgsql
 
-DIR=$INSTALLDIR/osm2pgsql-import-v5
+DIR=$INSTALLDIR/import/osm2pgsql-v5
 
 STYLENAME=openstreetmap-carto-v5
 STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.style
 LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua
 
-FLAT_NODE_FILE=$DIR/osm2pgsql-nodes.dat
-
+FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
 cd $DIR
 
@@ -41,6 +40,7 @@ if sudo -u maposmatic $OSM2PGSQL \
      --database=$DBNAME \
      --merc \
      --hstore-all \
+     --multi-geometry \
      --cache=1000 \
      --number-processes=2 \
      --style=$STYLE_FILE \

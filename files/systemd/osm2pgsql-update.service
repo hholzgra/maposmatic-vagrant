@@ -8,7 +8,7 @@ Environment=INSTALLDIR=@INSTALLDIR@
 Environment=STYLEDIR=@STYLEDIR@
 Environment=PYTHONPATH=@INSTALLDIR@/lib/@PYTHON_VERSION@/site-packages/:/usr/lib/python3/dist-packages/
 Environment=PATH=@INSTALLDIR@/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-WorkingDirectory=@INSTALLDIR@/osm2pgsql-import
+WorkingDirectory=@IMPORTDIR@
 ExecStart=@INCDIR@/osm2pgsql-update.sh
 
 

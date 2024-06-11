@@ -5,24 +5,21 @@
 #----------------------------------------------------
 
 FILEDIR=${FILEDIR:-/vagrant/files}
-
 OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
 DBNAME=osmcarto5
-STYLENAME=openstreetmap-carto-v5
 
-DIR=$INSTALLDIR/osm2pgsql-import-v5
+IMPORTDIR=$INSTALLDIR/import/osm2pgsql-v5
+mkdir -p $IMPORTDIR
+chown maposmatic $IMPORTDIR
+cd $IMPORTDIR
+
+STYLENAME=openstreetmap-carto-v5
 
 STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.style
 LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua
 
-FLAT_NODE_FILE=$DIR/osm2pgsql-nodes.dat
-
-cd $INSTALLDIR
-
-mkdir -p $DIR
-chmod a+w $DIR
-cd $DIR
+FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
 let CacheSize=$MemTotal/3072
 echo "osm2pgsql cache size: $CacheSize"
@@ -57,6 +54,7 @@ then
     sed_opts=""
     sed_opts+="-e s|@INSTALLDIR@|$INSTALLDIR|g "
     sed_opts+="-e s|@INCDIR@|$INCDIR|g "
+    sed_opts+="-e s|@IMPORTDIR@|$IMPORTDIR|g "
     sed_opts+="-e s|@STYLEDIR@|$STYLEDIR|g "
     sed_opts+="-e s|@PYTHON_VERSION@|$PYTHON_VERSION|g "
     for file in $FILEDIR/systemd/osm2pgsql-update-v5.*

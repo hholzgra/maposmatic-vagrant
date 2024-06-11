@@ -5,54 +5,51 @@
 #----------------------------------------------------
 
 FILEDIR=${FILEDIR:-/vagrant/files}
-
 OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
-cd $INSTALLDIR
+DBNAME=gis
 
-mkdir -p osm2pgsql-import
-chmod a+w osm2pgsql-import
-cd osm2pgsql-import
+IMPORTDIR=$INSTALLDIR/import/osm2pgsql
+mkdir -p $IMPORTDIR
+chown maposmatic $IMPORTDIR
+cd $IMPORTDIR
+
+STYLE_FILE=hstore-only.style
+LUA_FILE=openstreetmap-carto.lua
+FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
 # get style file
-
-if ! test -f hstore-only.style
-then
-  wget https://raw.githubusercontent.com/giggls/openstreetmap-carto-de/v4.24.0-de1/hstore-only.style
-fi
-if ! test -f openstreetmap-carto.lua
-then
-  wget https://raw.githubusercontent.com/giggls/openstreetmap-carto-de/v4.24.0-de1/openstreetmap-carto.lua
-fi
+# TODO take these from osmcarto german style, requires tweaking the install order
+BASE_URL=https://raw.githubusercontent.com/giggls/openstreetmap-carto-de/v4.24.0-de1/
+for file in $STYLE_FILE $LUA_FILE
+do
+    if ! test -f $file
+    then
+	wget "$BASE_URL/$file"
+    fi
+done
 
 let CacheSize=$MemTotal/3072
 echo "osm2pgsql cache size: $CacheSize"
-
-OSM_IMPORTDIR=$INSTALLDIR/osm-import
-mkdir -p $OSM_IMPORTDIR
-chown maposmatic $OSM_IMPORTDIR
 
 # import data
 time sudo --user=maposmatic /usr/bin/osm2pgsql \
      --create \
      --slim \
-     --database=gis \
+     --database=$DBNAME \
      --merc \
      --hstore-all \
      --cache=$CacheSize \
      --number-processes=$(nproc) \
-     --style=hstore-only.style \
-     --tag-transform-script=openstreetmap-carto.lua \
+     --style=$STYLE_FILE \
+     --tag-transform-script=$LUA_FILE \
      --prefix=planet_osm_hstore \
-     --flat-nodes=$OSM_IMPORTDIR/osm2pgsql-nodes.dat \
-     --disable-parallel-indexing \
-     --keep-coastlines \
+     --flat-nodes=$FLAT_NODE_FILE \
      --disable-parallel-indexing \
      --keep-coastlines \
      $OSM_EXTRACT
 
 # install views to provide expected table layouts from hstore-only bas tables
-
 for dir in db_indexes db_functions db_views
 do
   for sql in $FILEDIR/database/$dir/*.sql
@@ -60,7 +57,6 @@ do
     sudo -u maposmatic psql gis < $sql
   done
 done
-
 
 # prepare for diff imports
 REPLICATION_BASE_URL=$(osmium fileinfo -g 'header.option.osmosis_replication_base_url' "${OSM_EXTRACT}")
@@ -75,6 +71,7 @@ then
     sed_opts=""
     sed_opts+="-e s|@INSTALLDIR@|$INSTALLDIR|g "
     sed_opts+="-e s|@INCDIR@|$INCDIR|g "
+    sed_opts+="-e s|@IMPORTDIR@|$IMPORTDIR|g "
     sed_opts+="-e s|@STYLEDIR@|$STYLEDIR|g "
     sed_opts+="-e s|@PYTHON_VERSION@|$PYTHON_VERSION|g "
     for file in $FILEDIR/systemd/osm2pgsql-update.*
@@ -98,5 +95,5 @@ then
     fi
 fi
 
-sudo -u maposmatic psql gis -c "update maposmatic_admin set last_update='$REPLICATION_TIMESTAMP'"
+sudo -u maposmatic psql $DBNAME -c "update maposmatic_admin set last_update='$REPLICATION_TIMESTAMP'"
 

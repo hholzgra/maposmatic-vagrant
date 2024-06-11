@@ -3,12 +3,12 @@
 DBNAME=gis
 OSM2PGSQL=/usr/bin/osm2pgsql
 
-DIR=$INSTALLDIR/osm2pgsql-import
+DIR=$INSTALLDIR/import/osm2pgsql
 
 STYLE_FILE=hstore-only.style
 LUA_FILE=openstreetmap-carto.lua
 
-FLAT_NODE_FILE=$INSTALLDIR/osm2pgsql-import/osm2pgsql-nodes.dat
+FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
 cd $DIR
 
