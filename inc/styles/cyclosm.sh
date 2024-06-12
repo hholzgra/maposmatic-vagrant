@@ -7,7 +7,7 @@ cd cyclosm-cartocss-style
 
 git checkout v0.6
 
-patch -p1 < $STYLEDIR/cyclosm.patch
+patch -p1 < $INCDIR/styles/cyclosm.patch
 
 ln -s $SHAPEFILE_DIR data
 
