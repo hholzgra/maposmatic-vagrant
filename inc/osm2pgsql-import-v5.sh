@@ -80,3 +80,5 @@ fi
 
 sudo -u maposmatic psql $DBNAME -c "update maposmatic_admin set last_update='$REPLICATION_TIMESTAMP'"
 
+cd $STYLEDIR/$STYLENAME/
+./scripts/get-external-data.py

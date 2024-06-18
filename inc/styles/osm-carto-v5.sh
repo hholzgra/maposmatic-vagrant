@@ -10,8 +10,6 @@ git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openst
 cd openstreetmap-carto-v5
 git checkout --quiet v5.8.0
 
-ln -s $SHAPEFILE_DIR data
-
 sed '/\sname:/d' < project.mml > osm.mml
 patch -p1 < $INCDIR/styles/osm-carto.patch
 carto --quiet --api $MAPNIK_VERSION_FOR_CARTO osm.mml > osm.xml
@@ -21,4 +19,4 @@ php $FILEDIR/tools/postprocess-style.php osm.xml
 
 php $FILEDIR/tools/make-style-monochrome.php
 
- 
+chown -R maposmatic .
