@@ -5,3 +5,8 @@
 <!ENTITY prefix "planet_osm">
 <!ENTITY datasource-settings SYSTEM "db_global.xml.inc">
 
+<!ENTITY rail "yes">
+<!ENTITY driveway "#010101FF">
+<!ENTITY walls "yes">
+
+
