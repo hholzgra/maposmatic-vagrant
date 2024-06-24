@@ -34,6 +34,7 @@ apt-get --quiet install --assume-yes \
     cabextract \
     cmake \
     coderay \
+    command-not-found \
     curl \
     emacs \
     expat \
@@ -95,6 +96,7 @@ apt-get --quiet install --assume-yes \
     net-tools \
     nlohmann-json3-dev \
     ntp \
+    ntpsec-ntpdate \
     osm2pgsql \
     osmctools \
     osmium-tool \
