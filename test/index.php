@@ -33,7 +33,8 @@ foreach (glob("test-*.sh") as $file) {
             $time = strftime("%T", time() - filemtime("$base.running"));
         } else if(file_exists($base.".time")) {
             $status = file_exists($result) ? "success" : "failed";
-            $time = trim(file_get_contents($base.".time"));
+	    $time = trim(file_get_contents($base.".time"));
+	    $time = preg_replace('|\.\d\d|', '', $time);
         }
         $result_url = ($status == "success") ? $result : $log_url;
 
