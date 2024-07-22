@@ -128,6 +128,7 @@ apt-get --quiet install --assume-yes \
     strace \
     subversion \
     sysvbanner \
+    tcpdump \
     texlive-extra-utils \
     texlive-latex-base \
     texlive-latex-recommended \
@@ -137,6 +138,7 @@ apt-get --quiet install --assume-yes \
     unifont \
     unifont-bin \
     unzip \
+    vim \
     virtualenv \
     w3m \
     wkhtmltopdf \
