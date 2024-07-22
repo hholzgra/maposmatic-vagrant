@@ -50,6 +50,7 @@ BBOX=${BBOX:-"52.0100,8.5122 52.0300,8.5432"} # Bielefeld
 LANG=${LANG:-"de_DE.utf8"}
 
 PAPER=${PAPER:-"Din A4"}
+OUTPUT_FORMATS=${OUTPUT_FORMATS:-"png pdf svgz multi"}
 THUMB_WIDTH=${THUMB_WIDTH:-400}
 
 INDEX=${INDEX:-"Street"}
@@ -200,7 +201,7 @@ make_map() {
     style="$1"
     mode="$2" # base or overlay
 
-    for format in png pdf svgz multi
+    for format in $OUTPUT_FORMATS
     do
         base=test-$mode-$style-$format
 
