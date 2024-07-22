@@ -289,7 +289,11 @@ done
 chmod a+x test-run.sh
 parallel --eta < test-run.sh
 
-echo "all rendering done, updating index pages"
+echo "generating summary PDFs"
+php $FILEDIR/tools/all-styles-pdf.php > all-styles.tex
+pdflatex all-styles.tex > /dev/null
+
+echo "updating index pages"
 php index.php > index.html
 ( cd thumbnails && php index.php > index.html )
 
