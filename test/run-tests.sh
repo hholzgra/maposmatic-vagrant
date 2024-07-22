@@ -288,7 +288,8 @@ do
 done
 
 chmod a+x test-run.sh
-parallel --eta < test-run.sh
+# TODO find better way to prevent /dev/tty error messages that started with Debian 12
+parallel --eta < test-run.sh 2>&1 | sed -e's|sh: 1: cannot open /dev/tty: No such device or address||g'
 
 echo "generating summary PDFs"
 php $FILEDIR/tools/all-styles-pdf.php > all-styles.tex
