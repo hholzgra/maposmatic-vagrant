@@ -1,14 +1,58 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+#
+# CONFIGURATION SETTINGS
+#
+
+# VM box to start from
+BASE_BOX='debian/bookworm64'
+
+# VM name
+VM_NAME='maposmatic'
+
+# how much of the hosts CPU and RAM resources to use
+CPU_RATIO=1   # 100% of the CPU cores
+MEM_RATIO=0.5 #  50% of the total RAM
+
+# different branches of the ocitysmap renderer and 
+# maposmatic web frontend can be used for testing
 OCITYSMAP_BRANCH='master'
 MAPOSMATIC_BRANCH='main'
 
-Vagrant.configure(2) do |config|
-  config.vm.box = "debian/bookworm64"
+# what host ports to map the maposmatic and weblate
+# http services to
+MAPOSMATIC_HOST_PORT=8000
+WEBLATE_HOST_PORT=8080
 
-  config.vm.network "forwarded_port", guest: 80, host: 8001
-  config.vm.network "forwarded_port", guest: 8080, host: 8081
+#
+# NO EDITING USUALLY NEEDED BEYOND THIS POINT
+#
+
+Vagrant.configure(2) do |config|
+  host_os = RbConfig::CONFIG['host_os']
+  if host_os =~ /darwin/
+    host_cpus = `sysctl -n hw.ncpu`.to_i
+    host_mem = `sysctl -n hw.memsize`.to_i / 1024^2
+  elsif host_os =~ /linux/
+    host_cpus = `nproc`.to_i
+    host_mem = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024
+  else # should be some sort of windows then?
+    # TODO: should properly detect windows by name
+    # TODO: should support other Unixoids like Solaris and the *BSDs, too
+    host_cpus = `wmic cpu get NumberOfCores`.split("\n")[2].to_i
+    host_mem = `wmic OS get TotalVisibleMemorySize`.split("\n")[2].to_i / 1024
+  end
+
+  use_cpus = (host_cpus * CPU_RATIO).ceil
+  use_mem  = (host_mem  * MEM_RATIO).ceil
+
+  puts "Running on #{host_os}, using #{use_cpus} of #{host_cpus} CPU cores and #{use_mem} of #{host_mem}MB RAM"
+
+  config.vm.box = BASE_BOX
+
+  config.vm.network "forwarded_port", guest: 80, host: MAPOSMATIC_HOST_PORT
+  config.vm.network "forwarded_port", guest: 8080, host: WEBLATE_HOST_PORT
 
   config.vbguest.auto_update = false
 
@@ -18,9 +62,9 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |vb, override|
     # vb.gui = true
-    vb.name = "maposmatic"
-    vb.memory = "16384"
-    vb.cpus   = "6"
+    vb.name = VM_NAME
+    vb.memory = "#{use_mem}"
+    vb.cpus   = "#{use_cpus}"
 
     override.vm.synced_folder ".", "/vagrant/", mount_options: ["dmode=777"]
     override.vm.synced_folder "test", "/vagrant/test", mount_options: ["dmode=777"]
