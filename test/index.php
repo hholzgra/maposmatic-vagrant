@@ -75,12 +75,18 @@ if (count($runlist)) {
 <head><title>Test Results</title></head>
 <body>
 <a href="thumbnails/">Thumbnails</a>
+<?php if (file_exists("all-styles.pdf")) { ?>
 -
 <a href="all-styles.pdf">all styles in a PDF book</a>
+<?php } ?>
+<?php if (file_exists("all-styles-poster.pdf")) { ?>
 -
 <a href="all-styles-poster.pdf">all styles on poster size pages</a>
+<?php } ?>
+<?php if (file_exists("all-overlays-poster.pdf")) { ?>
 -
 <a href="all-overlays-poster.pdf">all overlays on poster size pages</a>
+<?php } ?>
 <hr/>
     <table border='1'>
     <tr valign='top'>

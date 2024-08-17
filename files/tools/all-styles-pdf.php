@@ -1,6 +1,6 @@
 <?php
 
-$PAPER_SIZE='{841mm,594mm}'; # DinA1 landscape
+$PAPER_SIZE='{594mm,841mm}'; # DinA1 portrait
 $PAGE_COUNT=6;
 
 $text = "";

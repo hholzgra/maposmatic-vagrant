@@ -14,3 +14,5 @@
 
 . $INCDIR/install-packages/fonts.sh
 
+. $INCDIR/install-packages/misc.sh
+

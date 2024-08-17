@@ -244,7 +244,7 @@ else
   # with no explicit styles requested we remove and re-render everything
   STYLES=$(grep ^name= $CONFIG | grep -v '#' | grep -vi 'Overlay' | sed -e 's/name=//g' | sort)
   OVERLAYS=$(grep ^name= $CONFIG | grep -v '#' | grep -i 'Overlay' | sed -e 's/name=//g'  | sort)
-  rm -rf test-* thumbnails/test-* layout-*
+  rm -rf test-* thumbnails/test-* layout-* all-*.pdf
 fi
 
 ## render
