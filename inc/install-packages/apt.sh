@@ -125,6 +125,7 @@ apt-get --quiet install --assume-yes \
     python3-virtualenv \
     redis \
     renderd \
+    ruby-dev \
     strace \
     subversion \
     sysvbanner \
