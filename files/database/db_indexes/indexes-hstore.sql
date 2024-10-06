@@ -46,3 +46,10 @@ CREATE INDEX planet_osm_hstore_line_track
 CREATE INDEX planet_osm_hstore_polygon_track
   ON planet_osm_hstore_polygon USING GIST (way)
   WHERE (tags->'leisure') = 'track';
+CREATE INDEX planet_osm_hstore_point_leisure
+  ON planet_osm_hstore_point USING GIST (way)
+  WHERE (tags->'leisure') IS NOT NULL;
+CREATE INDEX planet_osm_hstore_point_tree
+  ON planet_osm_hstore_polygon USING GIST (way)
+  WHERE (tags->'natural') = 'tree';
+
