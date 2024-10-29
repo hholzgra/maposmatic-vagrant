@@ -14,6 +14,7 @@ run-tests-local-config
 *.log
 *.err
 *.time
+*.running
 
 *.tex
 *.aux
