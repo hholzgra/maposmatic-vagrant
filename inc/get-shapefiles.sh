@@ -3,6 +3,13 @@
 # Central download script for all shapefiles needed by 
 # the supported Mapnik Stylesheets
 
+if tty
+then
+    SAME_LINE="-n"
+else
+    SAME_LINE=""
+fi
+
 echo
 echo "Downloading and preprocessing shapefiles"
 echo
@@ -107,7 +114,7 @@ do
     ext=${archive#*.}
     archbase=$(basename $archive .$ext)
     
-    echo -n "downloading $archive"
+    echo $SAME_LINE "downloading $archive"
 
     # remove extra backup if exists
     rm -f $archive.1
@@ -152,7 +159,7 @@ do
     # or process shapefile archive (from download or cache) if actual shapefile not found
     if [ \( -f $DOWNLOAD_DIR/$archive.1 \) -o \( ! -d $SHAPEFILE_DIR/$archbase \) ]
     then
-	echo -n " ... unpacking"
+	echo $SAME_LINE " ... unpacking"
 
         # again: remove the backup file if it exists
         rm -f $archive.1
@@ -173,7 +180,7 @@ do
 	    tar -xf $DOWNLOAD_DIR/$archive
         fi
 
-	echo -n " ... indexing"
+	echo $SAME_LINE " ... indexing"
 	for shppath in $(find . -name '*.shp')
 	do
 	    shpfile=$(basename $shppath)
