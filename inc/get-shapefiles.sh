@@ -120,14 +120,22 @@ do
     rm -f $archive.1
 
     # download the file only if newer than the localy cached copy
-    if ! wget --quiet --timestamping --backups=1 --no-check-certificate $url
+    if ! wget --quiet --timestamping --backups=1 --no-check-certificate --timeout=30 --tries=1 "$url"
     then
 	echo " ... wget failed: $url"
 
 	if ! test -f $archive
 	then
-	    # only continue with next download file if no prior copy is available
-  	    continue
+	    # try go get from our own backup server
+	    echo $SAME_LINE "trying backup archive "
+            filename=$(basename "$url")
+	    if ! wget --quiet --timeout=30 --tries=1 https://get-map.org/downloads/shapefile-backups/$filename
+	    then
+	        # could not find it in any of the known places
+		# -> skip further processing, continue with next shapefile in list
+		echo "skipping $filename"
+                continue
+            fi
 	fi
     fi
 
