@@ -15,6 +15,9 @@ VM_NAME='maposmatic'
 CPU_RATIO=1   # 100% of the CPU cores
 MEM_RATIO=0.5 #  50% of the total RAM
 
+# how much max. disk space to give the VM
+USE_DISK='500GB'
+
 # different branches of the ocitysmap renderer and 
 # maposmatic web frontend can be used for testing
 OCITYSMAP_BRANCH='master'
@@ -47,7 +50,7 @@ Vagrant.configure(2) do |config|
   use_cpus = (host_cpus * CPU_RATIO).ceil
   use_mem  = (host_mem  * MEM_RATIO).ceil
 
-  puts "Running on #{host_os}, using #{use_cpus} of #{host_cpus} CPU cores and #{use_mem} of #{host_mem}MB RAM"
+  puts "Running on #{host_os}, using #{use_cpus} of #{host_cpus} CPU cores, #{use_mem} of #{host_mem}MB RAM and max. #{USE_DISK} disk space"
 
   config.vm.box = BASE_BOX
 
@@ -89,7 +92,7 @@ Vagrant.configure(2) do |config|
   unless Vagrant.has_plugin?("vagrant-disksize")
     raise 'disksize plugin is not installed - run "vagrant plugin install vagrant-disksize" first'
   end
-  config.disksize.size = '2000GB'
+  config.disksize.size = USE_DISK
 
   if Vagrant.has_plugin?("vagrant-env")
     config.env.enable
