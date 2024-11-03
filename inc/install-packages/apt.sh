@@ -123,6 +123,7 @@ apt-get --quiet install --assume-yes \
     python3-pip \
     python3-pil \
     python3-virtualenv \
+    python3-venv \
     redis \
     renderd \
     ruby-dev \
