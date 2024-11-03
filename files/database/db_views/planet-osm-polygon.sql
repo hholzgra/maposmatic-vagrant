@@ -23,6 +23,7 @@ SELECT osm_id
 , tags->'admin_level' as "admin_level"
 , tags->'aerialway' as "aerialway"
 , tags->'aeroway' as "aeroway"
+, tags->'allotents' as "allotments"
 , tags->'amenity' as "amenity"
 , tags->'area' AS "area"
 , tags->'barrier' as "barrier"
