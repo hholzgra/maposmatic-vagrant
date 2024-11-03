@@ -132,7 +132,9 @@ done
 
 # merge all elevation data into one single large tiled file
 echo "merging data into single file"
-gdal_merge.py -n 32767 -co BIGTIFF=YES -co TILED=YES -co COMPRESS=LZW -co PREDICTOR=2 -o raw.tif *.hgt.tif -q
+# need to enforce use of distro script here as the one 
+# installed from PIP throws NumPy version errors
+/usr/bin/gdal_merge.py -n 32767 -co BIGTIFF=YES -co TILED=YES -co COMPRESS=LZW -co PREDICTOR=2 -o raw.tif *.hgt.tif -q
 
 ln -s raw.tif dem-srtm.tiff
 ln -s raw.tif dem_srtm.tiff
