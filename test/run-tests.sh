@@ -60,6 +60,16 @@ PREVIEW_DIR=${PREVIEW_DIR:-"/home/maposmatic/maposmatic/www/static/img/"}
 
 PYTHON="python3"
 
+### default settings done
+
+
+### make sure we ave a python virtual environment enabled
+if test -z "$VIRTUAL_ENV"
+then
+	echo "No active python virtual environment found, terminating"
+	exit 3
+fi
+
 
 ### create reduced size preview images in several resolutions
 make_previews () {
