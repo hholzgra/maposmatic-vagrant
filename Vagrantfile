@@ -66,10 +66,10 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_x11 = true
 
   config.vm.provider "virtualbox" do |vb, override|
-    # vb.gui = true
-    vb.name   = VM_NAME
-    vb.memory = use_mem
-    vb.cpus   = use_cpus
+    vb.gui    = true
+    vb.name   = "#{VM_NAME}"
+    vb.memory = "#{use_mem}"
+    vb.cpus   = "#{use_cpus}"
 
     override.vm.synced_folder ".", "/vagrant/", mount_options: ["dmode=777"]
     override.vm.synced_folder "test", "/vagrant/test", mount_options: ["dmode=777"]
