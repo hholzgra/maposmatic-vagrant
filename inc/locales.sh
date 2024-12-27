@@ -22,6 +22,5 @@ mkdir /tmp/locales.$$
   export PATH=.:$PATH
   export LANG=C
   export LC_ALL=C
-  locale-gen | egrep "^/usr" | parallel
-)
-rm -rf /tmp/locales.$$
+  locale-gen | egrep "^/usr" | parallel && rm -rf /tmp/locales.$$
+) 
