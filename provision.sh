@@ -159,6 +159,14 @@ PYTHON_VERSION=python$(python3 -c 'import sys; print("%d.%d" % (sys.version_info
 # install all locales in the background
 . $INCDIR/locales.sh
 
+banner "shapefiles"
+# install shapefiles
+. $INCDIR/get-shapefiles.sh
+# set up shapefile update job
+cp $FILEDIR/systemd/shapefile-update.* /etc/systemd/system
+systemctl daemon-reload
+
+
 # initial git configuration
 . $INCDIR/git-setup.sh
 
