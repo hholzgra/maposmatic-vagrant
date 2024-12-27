@@ -1,0 +1,170 @@
+{
+  "type": "umap",
+  "properties": {
+    "easing": true,
+    "embedControl": true,
+    "fullscreenControl": true,
+    "searchControl": true,
+    "datalayersControl": true,
+    "zoomControl": true,
+    "slideshow": {},
+    "captionBar": false,
+    "limitBounds": {},
+    "tilelayer": {},
+    "licence": "",
+    "description": "",
+    "name": "westen",
+    "displayPopupFooter": false,
+    "miniMap": false,
+    "moreControl": true,
+    "scaleControl": true,
+    "scrollWheelZoom": true,
+    "zoom": 6
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      2,
+      51
+    ]
+  },
+  "layers": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  8.51646423339844,
+                  52.03353819984969
+                ],
+                [
+                  8.521227836608888,
+                  52.03382861567416
+                ],
+                [
+                  8.521099090576174,
+                  52.031346819629526
+                ],
+                [
+                  8.51667881011963,
+                  52.03108279066673
+                ],
+                [
+                  8.51646423339844,
+                  52.03353819984969
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  8.527879714965822,
+                  52.02886488582792
+                ],
+                [
+                  8.532600402832033,
+                  52.02907611959975
+                ],
+                [
+                  8.532342910766603,
+                  52.026224379489356
+                ],
+                [
+                  8.528051376342775,
+                  52.02635640850916
+                ],
+                [
+                  8.527879714965822,
+                  52.02886488582792
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  8.511915206909181,
+                  52.02417787983946
+                ],
+                [
+                  8.517408370971681,
+                  52.02427030442337
+                ],
+                [
+                  8.516614437103273,
+                  52.02181438630589
+                ],
+                [
+                  8.512666225433351,
+                  52.0219332241582
+                ],
+                [
+                  8.511915206909181,
+                  52.02417787983946
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              8.521785736083986,
+              52.0276700760225
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              8.523298501968386,
+              52.02837640390888
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              8.522257804870607,
+              52.02859094054396
+            ]
+          }
+        }
+      ],
+      "_storage": {
+        "displayOnLoad": true,
+        "browsable": true,
+        "name": "Layer 1",
+        "id": 529191
+      }
+    }
+  ]
+}

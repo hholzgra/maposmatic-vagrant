@@ -1,0 +1,137 @@
+﻿{
+    "title": "test",
+    "center_lat": "52.028838",
+    "center_lon": "8.523116",
+    "base_layer": "OSM",
+    "nodes": [
+        {
+            "text": "Shopping",
+            "color": "#00ff00",
+            "icon": "shopping-cart",
+            "nodes": [
+                {
+                    "text": "EDEKA Niehoff",
+                    "icon": "shopping-cart",
+                    "lat": 52.0264393,
+                    "lon": 8.527414
+                },
+                {
+                    "text": "Aldi",
+                    "icon": "shopping-cart",
+                    "lat": 52.0264986,
+                    "lon": 8.5277741
+                },
+                {
+                    "text": "Combi",
+                    "icon": "shopping-cart",
+                    "lat": 52.0334578,
+                    "lon": 8.5257867
+                },
+                {
+                    "text": "Centralkauf",
+                    "icon": "shopping-cart",
+                    "lat": 52.0288475,
+                    "lon": 8.5236643
+                },
+                {
+                    "text": "Netto Marken-Discount",
+                    "icon": "shopping-cart",
+                    "lat": 52.0258613,
+                    "lon": 8.5220893
+                },
+                {
+                    "text": "Lidl",
+                    "icon": "shopping-cart",
+                    "lat": 52.0306064,
+                    "lon": 8.5276718
+                },
+                {
+                    "text": "Karstadt Lebensmittel",
+                    "icon": "shopping-cart",
+                    "lat": 52.0242338,
+                    "lon": 8.5317008
+                },
+                {
+                    "text": "Rewe",
+                    "icon": "shopping-cart",
+                    "lat": 52.025854,
+                    "lon": 8.5333001
+                }
+            ]
+        },
+        {
+            "text": "Health",
+            "color": "#ff0000",
+            "icon": "medkit",
+            "nodes": [
+                {
+                    "text": "Franziskus Hospital",
+                    "icon": "hospital-o",
+                    "lat": 52.0227162,
+                    "lon": 8.5231108
+                },
+                {
+                    "text": "Apotheke am Klösterchen",
+                    "icon": "medkit",
+                    "lat": 52.0251304,
+                    "lon": 8.5232272
+                },
+                {
+                    "text": "Hubertus-Apotheke",
+                    "icon": "medkit",
+                    "lat": 52.0277344,
+                    "lon": 8.5318199
+                },
+                {
+                    "text": "Lorbeer Apotheke",
+                    "icon": "medkit",
+                    "lat": 52.0271164,
+                    "lon": 8.525734
+                },
+                {
+                    "text": "Fontane Apotheke",
+                    "icon": "medkit",
+                    "lat": 52.023876,
+                    "lon": 8.5302668
+                },
+                {
+                    "text": "Bären-Apotheke",
+                    "icon": "medkit",
+                    "lat": 52.0249646,
+                    "lon": 8.5325651
+                },
+                {
+                    "text": "Pluspunkt Apotheke im Loom",
+                    "icon": "medkit",
+                    "lat": 52.025702,
+                    "lon": 8.5314271
+                }
+            ]
+        },
+        {
+            "text": "Religion",
+            "color": "#7f7f7f",
+            "icon": "plus-square",
+            "nodes": [
+                {
+                    "text": "Hauskapelle Franziskus-Hospital",
+                    "icon": "plus-square",
+                    "lat": 52.0236689,
+                    "lon": 8.5239089
+                },
+                {
+                    "text": "St.Liborius-Kirche",
+                    "icon": "plus-square",
+                    "lat": 52.0304481,
+                    "lon": 8.5197008
+                },
+                {
+                    "text": "Katholisch-Apostolische Gemeinde",
+                    "icon": "plus-square",
+                    "lat": 52.0243141,
+                    "lon": 8.529977
+                }
+            ]
+        }
+    ]
+}
