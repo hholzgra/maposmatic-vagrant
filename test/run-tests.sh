@@ -60,6 +60,16 @@ PREVIEW_DIR=${PREVIEW_DIR:-"/home/maposmatic/maposmatic/www/static/img/"}
 
 PYTHON="python3"
 
+### default settings done
+
+
+### make sure we ave a python virtual environment enabled
+if test -z "$VIRTUAL_ENV"
+then
+	echo "No active python virtual environment found, terminating"
+	exit 3
+fi
+
 
 ### create reduced size preview images in several resolutions
 make_previews () {
@@ -72,14 +82,12 @@ make_previews () {
     echo "convert $png $jpg" >> $script
     echo "convert -thumbnail $THUMB_WIDTH $png $thumb" >> $script
 
-    if test -n "$PREVIEW_DIR"
+    if test -d "$PREVIEW_DIR"
     then
 	echo "convert -resize  500x355 $png $PREVIEW_DIR/$name.jpg"      >> $script
 	echo "convert -resize  750x533 $png $PREVIEW_DIR/$name-1.5x.jpg" >> $script
 	echo "convert -resize 1000x710 $png $PREVIEW_DIR/$name-2x.jpg"   >> $script
     fi
-
-
 }
 
 make_previews_multi() {
