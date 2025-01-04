@@ -1,3 +1,5 @@
+set -x
+
 #----------------------------------------------------
 #
 # Import OSM data into database
@@ -16,7 +18,7 @@ cd $IMPORTDIR
 
 STYLENAME=openstreetmap-carto-v5
 
-STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.style
+STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto-flex.lua
 LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua
 
 FLAT_NODE_FILE=osm2pgsql-nodes.dat
@@ -27,19 +29,25 @@ echo "osm2pgsql cache size: $CacheSize"
 # import data
 time sudo --user=maposmatic /usr/local/bin/osm2pgsql \
      --create \
+     --output=flex \
      --slim \
      --database=$DBNAME \
-     --merc \
-     --hstore-all \
-     --multi-geometry \
      --cache=$CacheSize \
      --number-processes=$(nproc) \
      --style=$STYLE_FILE \
-     --tag-transform-script=$LUA_FILE \
      --flat-nodes=$FLAT_NODE_FILE \
      --disable-parallel-indexing \
-     --keep-coastlines \
      $OSM_EXTRACT
+
+cd $STYLEDIR/$STYLENAME/
+mkdir -p data
+chmod a+rwx data
+sudo -u maposmatic ./scripts/get-external-data.py --database=$DBNAME
+
+# build additional indes in parallel as per INSTALL.md
+./scripts/indexes.py -0 | xargs -0 -P0 -I{} sudo -u maposmatic psql -d $DBNAME -c "{}"
+
+sudo -u maposmatic $DBNAME < functions.sql
 
 # prepare for diff imports
 REPLICATION_BASE_URL=$(osmium fileinfo -g 'header.option.osmosis_replication_base_url' "${OSM_EXTRACT}")
@@ -79,6 +87,3 @@ then
 fi
 
 sudo -u maposmatic psql $DBNAME -c "update maposmatic_admin set last_update='$REPLICATION_TIMESTAMP'"
-
-cd $STYLEDIR/$STYLENAME/
-./scripts/get-external-data.py
