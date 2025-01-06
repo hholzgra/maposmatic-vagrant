@@ -19,7 +19,6 @@ cd $IMPORTDIR
 STYLENAME=openstreetmap-carto-v5
 
 STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto-flex.lua
-LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua
 
 FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
@@ -47,7 +46,7 @@ sudo -u maposmatic ./scripts/get-external-data.py --database=$DBNAME
 # build additional indes in parallel as per INSTALL.md
 ./scripts/indexes.py -0 | xargs -0 -P0 -I{} sudo -u maposmatic psql -d $DBNAME -c "{}"
 
-sudo -u maposmatic $DBNAME < functions.sql
+sudo -u maposmatic psql $DBNAME < functions.sql
 
 # prepare for diff imports
 REPLICATION_BASE_URL=$(osmium fileinfo -g 'header.option.osmosis_replication_base_url' "${OSM_EXTRACT}")
