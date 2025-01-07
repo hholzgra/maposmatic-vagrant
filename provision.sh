@@ -72,6 +72,17 @@ export $(grep MemTotal /proc/meminfo | sed -e's/kB//' -e's/ //g' -e's/:/=/')
 
 #----------------------------------------------------
 #
+# include local config file
+#
+#----------------------------------------------------
+
+if test -f $VAGRANT/local-config.sh
+then
+    . $VAGRANT/local-config.sh
+fi
+
+#----------------------------------------------------
+#
 # check for an OSM PBF extract to import
 #
 # if there are more than one: take the first one found
@@ -180,8 +191,11 @@ banner "building osm2pgsql"
 banner "building phyghtmap" # needed by OpenTopoMap
 . $INCDIR/from-source/phyghtmap.sh
 
-banner "db import" 
+banner "db import - classic" 
 . $INCDIR/osm2pgsql-import.sh
+
+banner "db import - flex"
+. $INCDIR/osm2pgsql-import-v5.sh
 
 banner "get bounds"
 python3 $INCDIR/data-bounds.py $INSTALLDIR/bounds $OSM_EXTRACT
@@ -204,9 +218,6 @@ systemctl daemon-reload
 
 banner "styles"
 . $INCDIR/styles.sh
-
-banner "db import v5"
-. $INCDIR/osm2pgsql-import-v5.sh
 
 
 #----------------------------------------------------
@@ -261,7 +272,12 @@ banner "security"
 
 banner "tileserver"
 
-. $INCDIR/tileserver.sh
+if test ${WITH_TILESERVER:=yes} = "yes"
+then
+    . $INCDIR/tileserver.sh
+else
+    echo "skipping"
+fi
 
 
 #----------------------------------------------------
@@ -271,7 +287,12 @@ banner "tileserver"
 #----------------------------------------------------
 
 banner "weblate"
-. $INCDIR/weblate.sh
+if test ${WITH_WEBLATE:=yes} = "yes"
+then
+    . $INCDIR/weblate.sh
+else
+    echo "skipping"
+fi
 
 #----------------------------------------------------
 #
