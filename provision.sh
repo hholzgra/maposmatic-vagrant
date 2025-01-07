@@ -191,8 +191,11 @@ banner "building osm2pgsql"
 banner "building phyghtmap" # needed by OpenTopoMap
 . $INCDIR/from-source/phyghtmap.sh
 
-banner "db import" 
+banner "db import - classic" 
 . $INCDIR/osm2pgsql-import.sh
+
+banner "db import - flex"
+. $INCDIR/osm2pgsql-import-v5.sh
 
 banner "get bounds"
 python3 $INCDIR/data-bounds.py $INSTALLDIR/bounds $OSM_EXTRACT
@@ -215,9 +218,6 @@ systemctl daemon-reload
 
 banner "styles"
 . $INCDIR/styles.sh
-
-banner "db import v5"
-. $INCDIR/osm2pgsql-import-v5.sh
 
 
 #----------------------------------------------------

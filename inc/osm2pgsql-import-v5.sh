@@ -18,7 +18,7 @@ cd $IMPORTDIR
 
 STYLENAME=openstreetmap-carto-v5
 
-STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto-flex.lua
+STYLE_FILE=$FILEDIR/osm2pgsql-flex/openstreetmap-carto-flex.lua
 
 FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
