@@ -46,6 +46,9 @@ db_disk.vdi
 *-console.log
 *-VBoxHeadless-*.log
 
+# ignore local config file
+local-config.sh
+
 # ignore OSM data files
 *.pbf
 

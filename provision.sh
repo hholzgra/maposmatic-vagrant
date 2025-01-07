@@ -72,6 +72,17 @@ export $(grep MemTotal /proc/meminfo | sed -e's/kB//' -e's/ //g' -e's/:/=/')
 
 #----------------------------------------------------
 #
+# include local config file
+#
+#----------------------------------------------------
+
+if test -f $VAGRANT/local-config.sh
+then
+    . $VAGRANT/local-config.sh
+fi
+
+#----------------------------------------------------
+#
 # check for an OSM PBF extract to import
 #
 # if there are more than one: take the first one found
@@ -261,7 +272,12 @@ banner "security"
 
 banner "tileserver"
 
-. $INCDIR/tileserver.sh
+if test ${WITH_TILESERVER:=yes} = "yes"
+then
+    . $INCDIR/tileserver.sh
+else
+    echo "skipping"
+fi
 
 
 #----------------------------------------------------
@@ -271,7 +287,12 @@ banner "tileserver"
 #----------------------------------------------------
 
 banner "weblate"
-. $INCDIR/weblate.sh
+if test ${WITH_WEBLATE:=yes} = "yes"
+then
+    . $INCDIR/weblate.sh
+else
+    echo "skipping"
+fi
 
 #----------------------------------------------------
 #
