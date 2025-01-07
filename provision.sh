@@ -195,7 +195,7 @@ banner "db import - classic"
 . $INCDIR/osm2pgsql-import.sh
 
 banner "db import - flex"
-. $INCDIR/osm2pgsql-import-v5.sh
+. $INCDIR/osm2pgsql-import-flex.sh
 
 banner "get bounds"
 python3 $INCDIR/data-bounds.py $INSTALLDIR/bounds $OSM_EXTRACT
