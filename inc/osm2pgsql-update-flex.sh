@@ -3,11 +3,10 @@
 DBNAME=osmcarto5
 OSM2PGSQL=/usr/local/bin/osm2pgsql
 
-DIR=$INSTALLDIR/import/osm2pgsql-v5
+DIR=$INSTALLDIR/import/osm2pgsql-flex
 
-STYLENAME=openstreetmap-carto-v5
-STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.style
-LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua
+STYLENAME=openstreetmap-carto-flex
+STYLE_FILE=$FILEDIR/som2pgsql-flex/openstreetmap-carto.style
 
 FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
@@ -38,13 +37,9 @@ if sudo -u maposmatic $OSM2PGSQL \
      --append \
      --slim \
      --database=$DBNAME \
-     --merc \
-     --hstore-all \
-     --multi-geometry \
      --cache=1000 \
      --number-processes=2 \
      --style=$STYLE_FILE \
-     --tag-transform-script=$LUA_FILE \
      --flat-nodes=$FLAT_NODE_FILE \
      $DIFFFILE 
 then

@@ -1,20 +1,17 @@
-#----------------------------------------------------
-#
-# Import OSM data into database
-#
-#----------------------------------------------------
+if ! test -d $STYLEDIR/osm2pgsql-carto-flex
+then
+    cd $STYLEDIR
 
-FILEDIR=${FILEDIR:-/vagrant/files}
-OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
+    git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-flex
+    cd openstreetmap-carto-flex
+    git checkout --quiet master
+fi
 
-DBNAME=osmcarto5
-
-IMPORTDIR=$INSTALLDIR/import/osm2pgsql-v5
 mkdir -p $IMPORTDIR
 chown maposmatic $IMPORTDIR
 cd $IMPORTDIR
 
-STYLENAME=openstreetmap-carto-v5
+STYLENAME=openstreetmap-carto-flex
 
 STYLE_FILE=$FILEDIR/osm2pgsql-flex/openstreetmap-carto-flex.lua
 
@@ -62,13 +59,13 @@ then
     sed_opts+="-e s|@IMPORTDIR@|$IMPORTDIR|g "
     sed_opts+="-e s|@STYLEDIR@|$STYLEDIR|g "
     sed_opts+="-e s|@PYTHON_VERSION@|$PYTHON_VERSION|g "
-    for file in $FILEDIR/systemd/osm2pgsql-update-v5.*
+    for file in $FILEDIR/systemd/osm2pgsql-update-flex.*
     do
 	sed $sed_opts < $file > /etc/systemd/system/$(basename $file)
     done
-    chmod 644 /etc/systemd/system/osm2pgsql-update-v5.*
+    chmod 644 /etc/systemd/system/osm2pgsql-update-flex.*
     systemctl daemon-reload
-    systemctl enable osm2pgsql-update-v5.timer
+    systemctl enable osm2pgsql-update-flex.timer
 fi
 
 if test -z "$REPLICATION_TIMESTAMP"

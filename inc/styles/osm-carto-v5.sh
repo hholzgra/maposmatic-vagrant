@@ -6,11 +6,11 @@
 
 cd $STYLEDIR
 
-git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-v5
-cd openstreetmap-carto-v5
+git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-flex
+cd openstreetmap-carto-flex
 git checkout --quiet master
 
-patch -p1 < $INCDIR/styles/osm-carto-v5.patch
+patch -p1 < $INCDIR/styles/osm-carto-flex.patch
 carto --quiet --api $MAPNIK_VERSION_FOR_CARTO project.mml > osm.xml
 
 php $FILEDIR/tools/postprocess-style.php osm.xml
