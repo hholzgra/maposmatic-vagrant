@@ -27,7 +27,7 @@ sudo -u postgres createuser -g maposmatic www-data
 # set password for gis database user
 sudo --user=maposmatic psql --dbname=postgres --command="ALTER USER maposmatic WITH PASSWORD 'secret';"
 
-for DATABASE in gis osmcarto5
+for DATABASE in gis osmcarto_flex
 do
   # creade databases for osm2pgsql import
   sudo --user=postgres createdb --encoding=UTF8 --locale=en_US.UTF-8 --template=template0 --owner=maposmatic $DATABASE

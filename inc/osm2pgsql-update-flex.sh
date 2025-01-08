@@ -1,6 +1,6 @@
 #! /bin/bash
 
-DBNAME=osmcarto5
+DBNAME=osmcarto_flex
 OSM2PGSQL=/usr/local/bin/osm2pgsql
 
 DIR=$INSTALLDIR/import/osm2pgsql-flex

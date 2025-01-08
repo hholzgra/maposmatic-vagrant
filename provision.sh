@@ -65,7 +65,10 @@ fi
 mkdir -p $CACHEDIR
 
 SHAPEFILE_DIR=$INSTALLDIR/shapefiles
+mkdir -p $SHAPEFILE_DIR
+
 STYLEDIR=$INSTALLDIR/styles
+mkdir -p $STYLEDIR
 
 # store memory size in KB in $MemTotal
 export $(grep MemTotal /proc/meminfo | sed -e's/kB//' -e's/ //g' -e's/:/=/')
