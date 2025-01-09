@@ -120,7 +120,10 @@ make_previews_multi() {
             layout-multi_page-title$factor.png     -geometry  +0+0     -composite \
             layout-multi_page-all$factor.png" >> $script
 
-    echo "cp layout-multi_page-all$factor.png $PREVIEW_DIR/layout/multi_page$factor.png" >> $script
+    if test -d "$PREVIEW_DIR"
+    then
+      echo "cp layout-multi_page-all$factor.png $PREVIEW_DIR/layout/multi_page$factor.png" >> $script
+    fi
 }
 
 ### make layout preview

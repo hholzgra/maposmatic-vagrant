@@ -7,17 +7,24 @@
 FILEDIR=${FILEDIR:-/vagrant/files}
 OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
-DBNAME=osmcarto5
+DBNAME=osmcarto_flex
 
-IMPORTDIR=$INSTALLDIR/import/osm2pgsql-v5
+if ! test -d $STYLEDIR/osm2pgsql-carto-flex
+then
+    cd $STYLEDIR
+
+    git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-flex
+    cd openstreetmap-carto-flex
+    git checkout --quiet master
+fi
+
 mkdir -p $IMPORTDIR
 chown maposmatic $IMPORTDIR
 cd $IMPORTDIR
 
-STYLENAME=openstreetmap-carto-v5
+STYLENAME=openstreetmap-carto-flex
 
-STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.style
-LUA_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto.lua
+STYLE_FILE=$FILEDIR/osm2pgsql-flex/openstreetmap-carto-flex.lua
 
 FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
@@ -27,19 +34,25 @@ echo "osm2pgsql cache size: $CacheSize"
 # import data
 time sudo --user=maposmatic /usr/local/bin/osm2pgsql \
      --create \
+     --output=flex \
      --slim \
      --database=$DBNAME \
-     --merc \
-     --hstore-all \
-     --multi-geometry \
      --cache=$CacheSize \
      --number-processes=$(nproc) \
      --style=$STYLE_FILE \
-     --tag-transform-script=$LUA_FILE \
      --flat-nodes=$FLAT_NODE_FILE \
      --disable-parallel-indexing \
-     --keep-coastlines \
      $OSM_EXTRACT
+
+cd $STYLEDIR/$STYLENAME/
+mkdir -p data
+chmod a+rwx data
+sudo -u maposmatic ./scripts/get-external-data.py --database=$DBNAME
+
+# build additional indes in parallel as per INSTALL.md
+./scripts/indexes.py -0 | xargs -0 -P0 -I{} sudo -u maposmatic psql -d $DBNAME -c "{}"
+
+sudo -u maposmatic psql $DBNAME < functions.sql
 
 # prepare for diff imports
 REPLICATION_BASE_URL=$(osmium fileinfo -g 'header.option.osmosis_replication_base_url' "${OSM_EXTRACT}")
@@ -57,13 +70,13 @@ then
     sed_opts+="-e s|@IMPORTDIR@|$IMPORTDIR|g "
     sed_opts+="-e s|@STYLEDIR@|$STYLEDIR|g "
     sed_opts+="-e s|@PYTHON_VERSION@|$PYTHON_VERSION|g "
-    for file in $FILEDIR/systemd/osm2pgsql-update-v5.*
+    for file in $FILEDIR/systemd/osm2pgsql-update-flex.*
     do
 	sed $sed_opts < $file > /etc/systemd/system/$(basename $file)
     done
-    chmod 644 /etc/systemd/system/osm2pgsql-update-v5.*
+    chmod 644 /etc/systemd/system/osm2pgsql-update-flex.*
     systemctl daemon-reload
-    systemctl enable osm2pgsql-update-v5.timer
+    systemctl enable osm2pgsql-update-flex.timer
 fi
 
 if test -z "$REPLICATION_TIMESTAMP"
@@ -79,6 +92,3 @@ then
 fi
 
 sudo -u maposmatic psql $DBNAME -c "update maposmatic_admin set last_update='$REPLICATION_TIMESTAMP'"
-
-cd $STYLEDIR/$STYLENAME/
-./scripts/get-external-data.py

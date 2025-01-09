@@ -167,6 +167,10 @@ DAEMON_ERRORS_SMTP_ENCRYPT = False
 DAEMON_ERRORS_SMTP_USER = ''
 DAEMON_ERRORS_SMTP_PASSWORD = ''
 
+EMAIL_HOST          = False; # "mail.example.org"
+EMAIL_HOST_USER     = "..."
+EMAIL_HOST_PASSWORD = "..."
+
 # # Show a link to donate to the MapOSMatic team
 MAPOSMATIC_DONATION = False
 
