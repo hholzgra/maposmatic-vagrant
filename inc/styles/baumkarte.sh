@@ -17,4 +17,3 @@ php $FILEDIR/tools/postprocess-style.php baumkarte.xml
 
 sudo -u maposmatic psql osmcarto_flex < ./Server_Update/tree_species.sql
 
- 
