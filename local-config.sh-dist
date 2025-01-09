@@ -1,2 +1,10 @@
-WITH_WEBLATE=no
-WITH_TILESERVER=no
+#
+# some local settings that can be used to configure
+# what to actually install
+#
+
+# whether to install the Weblate translation service instance
+WITH_WEBLATE=yes
+
+# whether to install a local tile server
+WITH_TILESERVER=yes
