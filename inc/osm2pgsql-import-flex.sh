@@ -18,6 +18,7 @@ then
     git checkout --quiet master
 fi
 
+IMPORTDIR=$INSTALLDIR/import/osm2pgsql-flex
 mkdir -p $IMPORTDIR
 chown maposmatic $IMPORTDIR
 cd $IMPORTDIR
