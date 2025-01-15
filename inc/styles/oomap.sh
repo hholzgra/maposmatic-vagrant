@@ -6,6 +6,8 @@ git clone https://github.com/hholzgra/oomap
 
 cd oomap/
 
+git remote add upstream https://github.com/oobrien/oomap
+
 git checkout maposmatic
 
 cd maptiler/
