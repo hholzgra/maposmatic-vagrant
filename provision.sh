@@ -173,6 +173,12 @@ else
     mkdir -p ~/.ccache
 fi
 
+# pre-seed apt package cache
+if test -d $CACHEDIR/apt
+then
+	cp -R $CACHEDIR/apt/* /var/cache/apt
+fi
+
 # sudo environment setup
 . $INCDIR/sudoers.sh
 
@@ -341,4 +347,8 @@ banner "cleanup"
 
 # write back compiler cache
 cp -rn /root/.ccache $CACHEDIR
+
+# write back apt package cache
+rm -rf $CACHEDIR/apt
+cp -R /var/cache/apt $CACHEDIR
 
