@@ -6,10 +6,11 @@ mkdir -p $FONTDIR
 
 cd $DOWNLOAD_DIR
 
-## opensans website currently out of order
+# upstream is https://www.opensans.com/download/
+# but is currently broken (2025-03-31)
+# so we use cached copies for now
 # wget --timestamping https://www.opensans.com/download/open-sans.zip -O open-sans.zip
 # wget --timestamping https://www.opensans.com/download/open-sans-condensed.zip -O open-sans-condensed.zip
-## install from local backup copies
 wget --timestamping https://get-map.org/downloads/open-sans.zip -O open-sans.zip
 wget --timestamping https://get-map.org/downloads/open-sans-condensed.zip -O open-sans-condensed.zip
 
