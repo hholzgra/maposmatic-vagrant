@@ -30,8 +30,10 @@ apt-get --quiet install --assume-yes \
     apt-src \
     asciidoctor \
     bc \
+    btop \
     build-essential \
     cabextract \
+    ccache \
     cmake \
     coderay \
     command-not-found \
@@ -45,13 +47,14 @@ apt-get --quiet install --assume-yes \
     gir1.2-pango-1.0 \
     gir1.2-rsvg-2.0 \
     gobject-introspection \
-    ccache \
     gdal-bin \
     gettext \
     gir1.2-pango-1.0 \
     git \
     git-svn \
+    htop \
     imagemagick \
+    iotop \
     libacl1-dev \
     libapache2-mod-fcgid \
     libapache2-mod-php \
