@@ -27,6 +27,7 @@ MAPOSMATIC_BRANCH='main'
 # http services to
 MAPOSMATIC_HOST_PORT=8000
 WEBLATE_HOST_PORT=8080
+UMAP_HOST_PORT=8090
 
 #
 # NO EDITING USUALLY NEEDED BEYOND THIS POINT
@@ -56,6 +57,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.network "forwarded_port", guest: 80, host: MAPOSMATIC_HOST_PORT
   config.vm.network "forwarded_port", guest: 8080, host: WEBLATE_HOST_PORT
+  config.vm.network "forwarded_port", guest: 8090, host: UMAP_HOST_PORT
 
   config.vbguest.auto_update = false
 
