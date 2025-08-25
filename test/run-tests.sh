@@ -179,7 +179,7 @@ make_cmd() {
     cmd="ocitysmap"
     cmd+=" --config=$CONFIG"
     cmd+=" --bounding-box=$BBOX"
-    cmd+=" --title='$style ($format)'"
+    cmd+=" --title='$style'"
     cmd+=" --prefix=$base"
     cmd+=" --index=$INDEX"
     cmd+=" --language=$LANG"
