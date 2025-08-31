@@ -4,14 +4,15 @@
 #
 #----------------------------------------------------
 
-cd $STYLEDIR
+STYLENAME=openstreetmap-carto-flex
 
-if test -d osm2pgsql-carto-flex
+cd $STYLEDIR
+if test -d $STYLENAME
 then
-  cd osm2pgsql-carto-flex
+  cd 
 else
-  git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-flex
-  cd openstreetmap-carto-flex
+  git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git $STYLENAME
+  cd $STYLENAME
   git checkout --quiet master
 fi
 
