@@ -9,12 +9,13 @@ OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
 DBNAME=osmcarto_flex
 
-if ! test -d $STYLEDIR/openstreetmap-carto-flex
+STYLENAME=openstreetmap-carto-flex
+if ! test -d $STYLEDIR/$STYLENAME
 then
     cd $STYLEDIR
 
-    git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-flex
-    cd openstreetmap-carto-flex
+    git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git $STYLENAME
+    cd $STYLENAME
     git checkout --quiet master
 fi
 
@@ -22,8 +23,6 @@ IMPORTDIR=$INSTALLDIR/import/osm2pgsql-flex
 mkdir -p $IMPORTDIR
 chown maposmatic $IMPORTDIR
 cd $IMPORTDIR
-
-STYLENAME=openstreetmap-carto-flex
 
 STYLE_FILE=$FILEDIR/osm2pgsql-flex/openstreetmap-carto-flex.lua
 
