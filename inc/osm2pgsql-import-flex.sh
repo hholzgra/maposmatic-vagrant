@@ -9,7 +9,7 @@ OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
 DBNAME=osmcarto_flex
 
-if ! test -d $STYLEDIR/osm2pgsql-carto-flex
+if ! test -d $STYLEDIR/openstreetmap-carto-flex
 then
     cd $STYLEDIR
 

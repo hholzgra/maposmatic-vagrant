@@ -6,9 +6,9 @@
 
 cd $STYLEDIR
 
-if test -d osm2pgsql-carto-flex
+if test -d openstreetmap-carto-flex
 then
-  cd osm2pgsql-carto-flex
+  cd openstreetmap-carto-flex
 else
   git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-flex
   cd openstreetmap-carto-flex
