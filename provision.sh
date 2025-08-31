@@ -231,16 +231,6 @@ banner "DEM setup"
 banner "renderer setup"
 . $INCDIR/ocitysmap.sh
 
-
-
-banner "shapefiles"
-# install shapefiles
-. $INCDIR/get-shapefiles.sh
-# set up shapefile update job
-cp $FILEDIR/systemd/shapefile-update.* /etc/systemd/system
-systemctl daemon-reload
-
-
 banner "styles"
 . $INCDIR/styles.sh
 
