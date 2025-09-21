@@ -5,8 +5,12 @@ FONTDIR=/usr/local/share/fonts/truetype/open-sans
 mkdir -p $FONTDIR
 
 cd $DOWNLOAD_DIR
-wget --timestamping https://www.opensans.com/download/open-sans.zip -O open-sans.zip
-wget --timestamping https://www.opensans.com/download/open-sans-condensed.zip -O open-sans-condensed.zip
+## opensans website currently out of order
+# wget --timestamping https://www.opensans.com/download/open-sans.zip -O open-sans.zip
+# wget --timestamping https://www.opensans.com/download/open-sans-condensed.zip -O open-sans-condensed.zip
+## install from local backup copies
+wget --timestamping https://get-map.org/downloads/open-sans.zip -O open-sans.zip
+wget --timestamping https://get-map.org/downloads/open-sans-condensed.zip -O open-sans-condensed.zip
 
 cd $FONTDIR
 unzip -qf $DOWNLOAD_DIR/open-sans.zip 
