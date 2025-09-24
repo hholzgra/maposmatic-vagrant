@@ -9,7 +9,7 @@ Environment=STYLEDIR=@STYLEDIR@
 Environment=PYTHONPATH=@INSTALLDIR@/lib/@PYTHON_VERSION@/site-packages/:/usr/lib/python3/dist-packages/
 Environment=PATH=@INSTALLDIR@/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 WorkingDirectory=@IMPORTDIR@
-ExecStart=@INCDIR@/osm2pgsql-update-v5.sh
+ExecStart=@INCDIR@/osm2pgsql-update-flex.sh
 
 
 
