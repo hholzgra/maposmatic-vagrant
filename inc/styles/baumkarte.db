@@ -1,4 +1,4 @@
 #! /bin/bash
 
-sudo -u maposmatic psql gis < $STYLEDIR/baumkarte/Server_Update/tree_species.sql
-sudo -u maposmatic psql gis < $STYLEDIR/baumkarte/Server_Update/views_for_bbox_server.sql
+sudo -u maposmatic psql osm2pgsql_flex < $STYLEDIR/baumkarte/Server_Update/tree_species.sql
+sudo -u maposmatic psql osm2pgsql_flex < $STYLEDIR/baumkarte/Server_Update/views_for_bbox_server.sql
