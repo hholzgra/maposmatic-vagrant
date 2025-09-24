@@ -7,7 +7,7 @@ index b7bf4c35..5c38b0bc 100644
    osm2pgsql: &osm2pgsql
      type: "postgis"
 -    dbname: "gis"
-+    dbname: "osmcarto_flex"
++    dbname: "osm2pgsql_flex"
 +    host: "gis-db"
 +    user: "maposmatic"
 +    password: "secret"
