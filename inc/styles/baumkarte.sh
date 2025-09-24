@@ -5,8 +5,11 @@
 #----------------------------------------------------
 
 cd $STYLEDIR
+if ! test -d baumkarte
+	git clone --quiet https://github.com/rudzick/Mymapnik_openstreetmap-carto baumkarte
+	git checkout master
+fi
 
-git clone --quiet https://github.com/rudzick/Mymapnik_openstreetmap-carto baumkarte
 cd baumkarte
 
 ln -s $SHAPEFILE_DIR data
