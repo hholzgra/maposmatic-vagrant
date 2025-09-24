@@ -1,0 +1,18 @@
+# bounding box for test map content
+BBOX="52.0140,8.5122 52.0240,8.5432" # Bielefeld
+
+# paper size and orientation
+PAPER="Din A1"
+ORIENTATION=landscape
+
+# output formats to generate
+OUTPUT_FORMATS="pdf png svgz multi"
+
+# base style for overlay style tests
+BASE_FOR_OVERLAY="Pandonia"
+
+# generate preview images for the web interface
+DO_PREVIEWS="yes"
+
+# generate style summary pages
+DO_SUMMARIES="yes"
