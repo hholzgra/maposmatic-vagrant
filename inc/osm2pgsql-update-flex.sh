@@ -1,12 +1,12 @@
 #! /bin/bash
 
-DBNAME=osmcarto_flex
+DBNAME=osm2pgsql_flex
 OSM2PGSQL=/usr/local/bin/osm2pgsql
 
 DIR=$INSTALLDIR/import/osm2pgsql-flex
 
-STYLENAME=openstreetmap-carto-flex
-STYLE_FILE=$FILEDIR/som2pgsql-flex/openstreetmap-carto.style
+STYLENAME=baumkarte
+STYLE_FILE=$STYLEDIR/$STYLENAME/openstreetmap-carto-flex.lua
 
 FLAT_NODE_FILE=osm2pgsql-nodes.dat
 

@@ -4,28 +4,33 @@
 #
 #----------------------------------------------------
 
-FILEDIR=${FILEDIR:-/vagrant/files}
+DBNAME=${DBNAME:-osm2pgsql_flex}
 OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
-DBNAME=osmcarto_flex
+STYLE_NAME="baumkarte"
+STYLE_URL="https://github.com/rudzick/Mymapnik_openstreetmap-carto"
+STYLE_BRANCH="master"
 
-if ! test -d $STYLEDIR/osm2pgsql-carto-flex
+FILEDIR=${FILEDIR:-/vagrant/files}
+STYLEDIR=${STYLEDIR:-/home/maposmatic/styles}
+OSM2PGSQL=/usr/local/bin/osm2pgsql
+
+STYLE_FILE=$STYLEDIR/$STYLE_NAME/openstreetmap-carto-flex.lua
+
+
+if ! test -d $STYLEDIR/$STYLE_NAME
 then
     cd $STYLEDIR
 
-    git clone --quiet https://github.com/gravitystorm/openstreetmap-carto.git openstreetmap-carto-flex
-    cd openstreetmap-carto-flex
-    git checkout --quiet master
+    git clone --quiet $STYLE_URL $STYLE_NAME
+    cd $STYLE_NAME
+    git checkout --quiet $STYLE_BRANCH
 fi
 
-IMPORTDIR=$INSTALLDIR/import/osm2pgsql-flex
+IMPORTDIR=$INSTALLDIR/import/$DBNAME
 mkdir -p $IMPORTDIR
 chown maposmatic $IMPORTDIR
 cd $IMPORTDIR
-
-STYLENAME=openstreetmap-carto-flex
-
-STYLE_FILE=$FILEDIR/osm2pgsql-flex/openstreetmap-carto-flex.lua
 
 FLAT_NODE_FILE=osm2pgsql-nodes.dat
 
@@ -33,19 +38,19 @@ let CacheSize=$MemTotal/3072
 echo "osm2pgsql cache size: $CacheSize"
 
 # import data
-time sudo --user=maposmatic /usr/local/bin/osm2pgsql \
-     --create \
-     --output=flex \
-     --slim \
-     --database=$DBNAME \
-     --cache=$CacheSize \
-     --number-processes=$(nproc) \
-     --style=$STYLE_FILE \
-     --flat-nodes=$FLAT_NODE_FILE \
-     --disable-parallel-indexing \
-     $OSM_EXTRACT
+time sudo --user=maposmatic $OSM2PGSQL \
+    --create \
+    --output=flex \
+    --slim \
+    --database=$DBNAME \
+    --cache=$CacheSize \
+    --number-processes=$(nproc) \
+    --style=$STYLE_FILE \
+    --flat-nodes=$FLAT_NODE_FILE \
+    --disable-parallel-indexing \
+    $OSM_EXTRACT
 
-cd $STYLEDIR/$STYLENAME/
+cd $STYLEDIR/$STYLE_NAME
 mkdir -p data
 chmod a+rwx data
 sudo -u maposmatic ./scripts/get-external-data.py --database=$DBNAME
