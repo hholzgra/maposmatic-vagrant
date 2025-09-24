@@ -56,6 +56,8 @@ THUMB_WIDTH=${THUMB_WIDTH:-400}
 INDEX=${INDEX:-"Street"}
 
 BASE_FOR_OVERLAY=${BASE_FOR_OVERLAY:-"Empty"}
+
+DO_PREVIEWS=${DO_PREVIEWS:-"yes"}
 PREVIEW_DIR=${PREVIEW_DIR:-"/home/maposmatic/maposmatic/www/static/img/"}
 
 PYTHON="python3"
@@ -220,9 +222,12 @@ make_map() {
 
 	make_cmd $base $style $mode $format >> $base.sh
 
-	if test "$format" == "png"
+	if test "$DO_PREVIEWS" = "yes"
 	then
-	    make_previews $base.png "style/$style" "$base.sh"
+	    if test "$format" = "png"
+	    then
+	        make_previews $base.png "style/$style" "$base.sh"
+	    fi
 	fi
 
 	chmod a+x $base.sh
@@ -264,24 +269,27 @@ fi
 #      enroll different sizes in loop
 #      import BBOX and PAPER from common include script
 
-if ! test -f layout-plain.png
+if test "$DO_PREVIEWS" = "yes"
 then
-   make_layout_preview "plain" "Plain" "png"
-fi
+    if ! test -f layout-plain.png
+    then
+       make_layout_preview "plain" "Plain" "png"
+    fi
 
-if ! test -f layout-single_page_index_side.png
-then
-   make_layout_preview "single_page_index_side" "Side index" "png"
-fi
+    if ! test -f layout-single_page_index_side.png
+    then
+       make_layout_preview "single_page_index_side" "Side index" "png"
+    fi
 
-if ! test -f layout-single_page_index_bottom.png
-then
-   make_layout_preview "single_page_index_bottom" "Bottom index" "png"
-fi
+    if ! test -f layout-single_page_index_bottom.png
+    then
+       make_layout_preview "single_page_index_bottom" "Bottom index" "png"
+    fi
 
-if ! test -f layout-multi_page-all.png
-then
-   make_layout_preview "multi_page" "Multi page" "pdf"
+    if ! test -f layout-multi_page-all.png
+    then
+       make_layout_preview "multi_page" "Multi page" "pdf"
+    fi
 fi
 
 for style in $STYLES
