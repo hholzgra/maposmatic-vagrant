@@ -125,6 +125,12 @@ DEFAULT_MAPOSMATIC_LOG_LEVEL = logging.INFO
 DEFAULT_MAPOSMATIC_LOG_FORMAT = "%(asctime)s - %(name)s@%(process)d - "\
                                 "%(levelname)s - %(message)s"
 
+# paper size limits in millimeters
+PAPER_WIDTH_MIN  =  100
+PAPER_HEIGHT_MIN =  100
+PAPER_WIDTH_MAX  = 2000
+PAPER_HEIGHT_MAX = 2000
+
 # # Base bounding box
 BASE_BOUNDING_BOX = (51.7, 7.5, 52.2, 9.5)
 
