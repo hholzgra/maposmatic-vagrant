@@ -51,7 +51,8 @@ The following components will be installed into the VM:
 
 ## Installation and useage
 
-* Copy a OSM PBF extract of your choice into this directory. If multiple files with ending '.pbf' are found only the first one is used. 
+* Copy a OSM PBF extract of your choice into this directory. If multiple files with ending '.pbf' are found only the first one is used.
+  * After the VM starts, some tests will be performed. You might want to **edit the `BBOX` variable specified in `test/run-test.sh`** to make sure your extract covers it, but this step is not necessary.
 * Run `vagrant up`
 * Be patient ...
   * The stylesheets require quite some extra downloads, and some processing on these (shape files, height information, ...). The downloads are cached localy, so downloads only happens on the first start mostly
