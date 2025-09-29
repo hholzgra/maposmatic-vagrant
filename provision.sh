@@ -223,9 +223,11 @@ banner "building phyghtmap" # needed by OpenTopoMap
 . $INCDIR/from-source/phyghtmap.sh
 
 banner "db import - classic" 
+export DBNAME=gis
 . $INCDIR/osm2pgsql-import.sh
 
 banner "db import - flex"
+export DBNAME=osm2pgsql_flex
 . $INCDIR/osm2pgsql-import-flex.sh
 
 banner "get bounds"
