@@ -6,6 +6,7 @@
 
 cd $STYLEDIR
 if ! test -d baumkarte
+then
 	git clone --quiet https://github.com/rudzick/Mymapnik_openstreetmap-carto baumkarte
 	git checkout master
 fi
