@@ -66,7 +66,7 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_x11 = true
 
   config.vm.provider "virtualbox" do |vb, override|
-    vb.gui    = true
+    vb.gui    = false
     vb.name   = "#{VM_NAME}"
     vb.memory = "#{use_mem}"
     vb.cpus   = "#{use_cpus}"
