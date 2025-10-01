@@ -1,5 +1,9 @@
 #! /bin/bash
 
-systemctl start osm2pgsql-update.timer
-systemctl start osm2pgsql-update-flex.timer
-systemctl start waymarked-update.timer
+for timer in osm2pgsql-update osm2pgsql-udate-flex waymarked-update
+do
+	if test -f /etc/systemd/system/$timer.timer
+	then
+		systemctl start $timer.timer
+	fi
+done
