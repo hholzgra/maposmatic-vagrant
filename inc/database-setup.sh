@@ -23,6 +23,7 @@ sudo --user=postgres createuser --superuser --no-createdb --no-createrole maposm
 sudo -u postgres createuser -g maposmatic root
 sudo -u postgres createuser -g maposmatic vagrant
 sudo -u postgres createuser -g maposmatic www-data
+sudo -u postgres createuser -g maposmatic tirex
 
 # set password for gis database user
 sudo --user=maposmatic psql --dbname=postgres --command="ALTER USER maposmatic WITH PASSWORD 'secret';"
