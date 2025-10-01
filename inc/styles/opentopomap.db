@@ -1,6 +1,6 @@
 #! /bin/bash
 
-DBNAME=${DBNAME:-gis}
+DBNAME=gis
 export $DBNAME
 
 cd $STYLEDIR/OpenTopoMap
