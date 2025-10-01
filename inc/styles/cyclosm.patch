@@ -1,15 +1,15 @@
 diff --git a/views.sql b/views.sql
-index f72e533..1579ad7 100644
+index 2ae2991..0f92df3 100644
 --- a/views.sql
 +++ b/views.sql
-@@ -166,8 +166,8 @@ CREATE VIEW cyclosm_ways AS
+@@ -185,8 +185,8 @@ CREATE VIEW cyclosm_ways AS
          name,
          osm_id,
          CASE
--            WHEN highway='cycleway' OR (highway IN ('path', 'footway', 'pedestrian', 'bridleway') AND bicycle IN ('yes', 'designated')) THEN CASE WHEN layer~E'^\\d+$' THEN 100*layer::integer+199 ELSE 199 END
+-            WHEN highway='cycleway' OR (highway IN ('path', 'footway', 'pedestrian', 'bridleway') AND bicycle IN ('yes', 'designated', 'permissive')) THEN CASE WHEN layer~E'^\\d+$' THEN 100*layer::integer+199 ELSE 199 END
 -            WHEN highway IN ('path', 'footway', 'pedestrian', 'bridleway') THEN CASE WHEN layer~E'^\\d+$' THEN 100*layer::integer+198 ELSE 198 END
-+            WHEN highway='cycleway' OR (highway IN ('path', 'footway', 'pedestrian', 'bridleway') AND bicycle IN ('yes', 'designated')) THEN 100*layer::integer+199
-+            WHEN highway IN ('path', 'footway', 'pedestrian', 'bridleway') THEN 100*layer::integer+198
++	    WHEN highway='cycleway' OR (highway IN ('path', 'footway', 'pedestrian', 'bridleway') AND bicycle IN ('yes', 'designated', 'permissive')) THEN COALESCE(layer, 0)*100+199
++            WHEN highway IN ('path', 'footway', 'pedestrian', 'bridleway') THEN COALESCE(layer)*100+198
              ELSE z_order
          END AS z_order,
          bridge,
