@@ -14,6 +14,7 @@ pip3 install --ignore-installed \
      attrs \
      babel \
      certifi \
+     cachetools \
      charset_normalizer \
      click \
      click-plugins \
