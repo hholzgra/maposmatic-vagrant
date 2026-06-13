@@ -87,9 +87,9 @@ DATABASES = {
         'HOST': 'gis-db',
         'PORT': '5432'
         },
-    'osm5': {
+    'flex': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'osmcarto5',
+        'NAME': 'osm2pgsql_flex',
         'USER': 'maposmatic',
         'PASSWORD': 'secret',
         'HOST': 'gis-db',
