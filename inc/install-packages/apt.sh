@@ -97,6 +97,7 @@ apt-get --quiet install --assume-yes \
     munin-node \
     munin-plugins-extra \
     net-tools \
+    neovim \
     nlohmann-json3-dev \
     ntp \
     ntpsec-ntpdate \
