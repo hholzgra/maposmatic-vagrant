@@ -317,6 +317,15 @@ else
     echo "skipping"
 fi
 
+
+
+#----------------------------------------------------
+#
+# Claude AI CLI setup
+#
+#----------------------------------------------------
+. $INCDIR/claude.sh
+
 #----------------------------------------------------
 #
 # tests
@@ -343,4 +352,3 @@ cp -rn /root/.ccache $CACHEDIR
 # write back apt package cache
 rm -rf $CACHEDIR/apt
 cp -R /var/cache/apt $CACHEDIR
-
