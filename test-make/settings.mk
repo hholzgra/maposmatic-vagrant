@@ -1,0 +1,9 @@
+OC_CONFIG  = /home/maposmatic/.ocitysmap.conf
+OC_BBOX    = 52.0100,8.5122 52.0300,8.5432
+OC_INDEX   = Street
+OC_LANG    = C.UTF-8
+OC_ORIENT  = landscape
+OC_PAPER   = Din A4
+OC_LAYOUT  = single_page_index_side
+OC_BASE    = Empty
+OC_TIMEOUT = 120
