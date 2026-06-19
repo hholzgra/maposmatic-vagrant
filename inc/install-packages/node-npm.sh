@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 # install extra npm packages
 banner "npm packages"

@@ -1,3 +1,4 @@
+#! /bin/bash -e
 #----------------------------------------------------
 #
 # MapOSMatic web frontend installation & configuration

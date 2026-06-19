@@ -1,3 +1,4 @@
+#! /bin/bash -e
 #----------------------------------------------------
 #
 # Build Mapnik 2.3.x beta from source

@@ -1,3 +1,4 @@
+#! /bin/bash -e
 #----------------------------------------------------
 #
 # German CartoOsm style sheet - the current openstreetmap.de style

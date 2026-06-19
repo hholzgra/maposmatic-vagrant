@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 mkdir $INSTALLDIR/umap
 cd $INSTALLDIR/umap

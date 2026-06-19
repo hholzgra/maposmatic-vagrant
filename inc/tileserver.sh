@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 cat $FILEDIR/config-files/renderd.conf >> /etc/renderd.conf
 

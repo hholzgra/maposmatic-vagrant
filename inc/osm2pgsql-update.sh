@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 DBNAME=gis
 OSM2PGSQL=/usr/bin/osm2pgsql

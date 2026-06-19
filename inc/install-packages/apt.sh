@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 # we don't have "banner" installed yet at this point
 echo "   ##    #####    #####          #####     ##     ####   #    #    ##     #### "

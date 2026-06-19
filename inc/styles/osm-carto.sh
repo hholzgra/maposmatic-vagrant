@@ -1,3 +1,4 @@
+#! /bin/bash -e
 #----------------------------------------------------
 #
 # CartoOsm style sheet - the current OSM default style

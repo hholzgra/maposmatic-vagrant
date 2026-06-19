@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash -e
 
 #
 # make variables used in provisioning scripts

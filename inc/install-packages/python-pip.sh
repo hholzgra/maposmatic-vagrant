@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 # this may cause crashes on fetching OSM diffs with osmium, so lets remove it for now
 # apt-get remove -y python3-apport > /dev/null

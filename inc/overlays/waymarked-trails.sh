@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 FILE="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 REPLICATION_BASE_URL="$(osmium fileinfo -g 'header.option.osmosis_replication_base_url' "${FILE}")"

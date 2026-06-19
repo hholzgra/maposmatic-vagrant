@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 . /etc/profile.d/mapospatic.sh
 

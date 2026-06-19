@@ -1,5 +1,5 @@
-#! /bin/bash
-# 
+#! /bin/bash -e
+ 
 # Central download script for all shapefiles needed by 
 # the supported Mapnik Stylesheets
 

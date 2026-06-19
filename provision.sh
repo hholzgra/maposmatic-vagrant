@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 # For some strange reason I don't understand yet Vagrant
 # seems to write "exit" to the provisioning scripts

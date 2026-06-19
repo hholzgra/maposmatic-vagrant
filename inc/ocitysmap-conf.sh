@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash -e
 
 CONF=${INSTALLDIR:-/home/maposmatic}/.ocitysmap.conf
 INCDIR=${INCDIR:-/vagrant/inc}

@@ -1,3 +1,4 @@
+#! /bin/bash -e
 DOWNLOAD_DIR=${CACHEDIR:-/vagrant/cache}/fonts
 mkdir -p $DOWNLOAD_DIR
 

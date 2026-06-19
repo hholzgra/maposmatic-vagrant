@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 cd $INSTALLDIR
 git clone --quiet https://github.com/hholzgra/umgebungsplaene
