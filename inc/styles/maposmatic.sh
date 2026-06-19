@@ -1,3 +1,4 @@
+#! /bin/bash -e
 #----------------------------------------------------
 #
 # MapOSMatic Printable stylesheet

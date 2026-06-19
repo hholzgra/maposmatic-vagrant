@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 DBNAME=osm2pgsql_flex
 OSM2PGSQL=/usr/local/bin/osm2pgsql

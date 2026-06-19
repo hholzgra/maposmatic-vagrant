@@ -1,3 +1,5 @@
+#! /bin/bash -e
+
 # simply generate all available locales
 
 echo "generating all locales ... this may take a while"

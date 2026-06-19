@@ -1,6 +1,8 @@
-#! /bin/bash
+#! /bin/bash -e
 
-cd $INSTALLDIR
+pushd
+
+cd "$INSTALLDIR"
 
 mkdir -p tools
 cd tools
@@ -12,4 +14,6 @@ cd osm2pgsql
 mkdir _build
 cd _build
 
-cmake .. >/dev/null && make -j$(nproc) install >/dev/null
+cmake .. >/dev/null && make -j"$(nproc)" install >/dev/null
+
+popd

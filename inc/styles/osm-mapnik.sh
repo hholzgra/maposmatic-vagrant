@@ -1,3 +1,4 @@
+#! /bin/bash -e
 #----------------------------------------------------
 #
 # Fetch old pre-Carto OSM Mapnik stylesheed

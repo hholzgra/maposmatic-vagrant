@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 deactivate 2>/dev/null
 . $INSTALLDIR/bin/activate

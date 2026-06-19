@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 for timer in osm2pgsql-update osm2pgsql-udate-flex waymarked-update
 do

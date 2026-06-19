@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 # download / install extra fonts
 banner "extra fonts"

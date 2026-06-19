@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 INCDIR=${INCDIR:-/vagrant/inc}
 

@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 mkdir -p $STYLEDIR/hillshade-overlay
 cd $STYLEDIR/hillshade-overlay

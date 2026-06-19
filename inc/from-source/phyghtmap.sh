@@ -1,6 +1,8 @@
-#! /bin/bash
+#! /bin/bash -e
 
-cd $INSTALLDIR
+pushd
+
+cd "$INSTALLDIR"
 
 mkdir -p tools
 cd tools
@@ -10,4 +12,4 @@ tar -xvf phyghtmap_2.21.orig.tar.gz
 cd phyghtmap-2.21
 python3 setup.py install
 
-cd ../..
+popd

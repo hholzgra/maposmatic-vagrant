@@ -1,3 +1,7 @@
+#! /bin/bash -e
+
+pushd
+
 #-------------------------------------------------------
 #
 # contrib extensions required by osml10n extension
@@ -13,7 +17,7 @@ sudo --user=maposmatic psql --dbname=gis --command="CREATE EXTENSION unaccent"
 #
 #----------------------------------------------------------
 
-cd $INSTALLDIR
+cd "$INSTALLDIR"
 
 mkdir -p tools
 cd tools
@@ -28,5 +32,4 @@ done
 make install
 sudo --user=maposmatic psql --dbname=gis --command="CREATE EXTENSION osml10n"
 
-cd ..
-
+popd

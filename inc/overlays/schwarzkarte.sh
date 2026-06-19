@@ -1,3 +1,4 @@
+#! /bin/bash -e
 #----------------------------------------------------
 #
 # "Schwarzkarte" overlay, showing building polygons only

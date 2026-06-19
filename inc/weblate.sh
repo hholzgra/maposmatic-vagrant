@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 useradd --create-home --home-dir=$INSTALLDIR/weblate weblate
 usermod -a -G www-data weblate
