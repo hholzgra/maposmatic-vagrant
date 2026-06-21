@@ -18,7 +18,13 @@ fi
 # once more just in case
 #
 #----------------------------------------------------
-growpart /dev/sda 1
+
+# growpart returns exit code 1 when not having enough space
+# here this can ony mean that the partition already has
+# been grown to full disk size earlier (in Vagrantfile)
+# so we accept error code 1 as OK, but not other codes
+growpart /dev/sda 1 && true || [ $? -eq 1 ]
+
 resize2fs $(mount | grep "on / " | egrep -o "^[^ ]+")
 df -h /
 
