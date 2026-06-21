@@ -78,3 +78,6 @@ not-for-git
 
 # ignore experimental stuff
 experimental/
+
+# ignore temporary files
+*.tmp
