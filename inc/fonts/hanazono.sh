@@ -10,4 +10,3 @@ wget --timestamping 'https://mirrors.dotsrc.org/osdn/hanazono-font/68253/hanazon
 cd $FONTDIR
 unzip -oqq "$DOWNLOAD_DIR/hanazono.zip" HanaMinA.ttf HanaMinB.ttf
 
-fc-cache -f

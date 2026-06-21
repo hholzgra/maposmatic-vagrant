@@ -14,7 +14,4 @@ wget --timestamping https://www.fontsquirrel.com/fonts/download/pt-sans/pt-sans.
 cd $FONTDIR
 unzip -qf $DOWNLOAD_DIR/pt-sans.zip
 
-# FIXME -> run this at end of font provisioning once only?
-fc-cache -f # not needed for Mapnik, but good practice nonetheless
-
 popd

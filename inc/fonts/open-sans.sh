@@ -19,8 +19,3 @@ wget --timestamping https://get-map.org/downloads/open-sans-condensed.zip -O ope
 cd $FONTDIR
 unzip -qf $DOWNLOAD_DIR/open-sans.zip 
 unzip -qf $DOWNLOAD_DIR/open-sans-condensed.zip
-
-# FIXME -> run this at end of font provisioning once only?
-fc-cache -f # not needed for Mapnik, but good practice nonetheless
-
-
