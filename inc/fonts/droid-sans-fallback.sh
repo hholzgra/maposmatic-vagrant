@@ -13,7 +13,4 @@ wget --timestamping https://github.com/android/platform_frameworks_base/raw/mast
 
 cp DroidSansFallback.ttf $FONTDIR
 
-# FIXME -> run this at end of font provisioning once only?
-fc-cache -f # not needed for Mapnik, but good practice nonetheless
-
 popd

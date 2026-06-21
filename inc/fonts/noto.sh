@@ -11,7 +11,3 @@ wget --timestamping https://noto-website-2.storage.googleapis.com/pkgs/Noto-unhi
 
 cd $FONTDIR
 unzip -qf $DOWNLOAD_DIR/Noto-unhinted.zip
-
-fc-cache -f # not needed for Mapnik, but good practice nonetheless
-
-
