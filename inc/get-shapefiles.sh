@@ -1,5 +1,7 @@
 #! /bin/bash -e
- 
+
+pushd . > /dev/null
+
 # Central download script for all shapefiles needed by 
 # the supported Mapnik Stylesheets
 
@@ -20,11 +22,11 @@ echo
 
 # download/cache directory for downloaded shapefile archives
 DOWNLOAD_DIR=${CACHEDIR:-/vagrant/cache}/shapefiles
-mkdir -p $DOWNLOAD_DIR
+mkdir -p "$DOWNLOAD_DIR"
 
 # actual shapefile directory tree
 SHAPEFILE_DIR=${SHAPEFILE_DIR:-/home/maposmatic/shapefiles}
-mkdir -p $SHAPEFILE_DIR
+mkdir -p "$SHAPEFILE_DIR"
 
 #
 # base URLs for the different spapefile servers
@@ -107,29 +109,29 @@ URLS+="$OSM_BAUSTELLE/mercator_tiffs.tar.bz2"
 #
 for url in $URLS
 do
-    cd $DOWNLOAD_DIR
+    cd "$DOWNLOAD_DIR"
     
     # some basic file name processing
-    archive=$(basename $url)
+    archive=$(basename "$url")
     ext=${archive#*.}
-    archbase=$(basename $archive .$ext)
+    archbase=$(basename "$archive" ."$ext")
     
     echo $SAME_LINE "downloading $archive"
 
     # remove extra backup if exists
-    rm -f $archive.1
+    rm -f "$archive".1
 
     # download the file only if newer than the localy cached copy
     if ! wget --quiet --timestamping --backups=1 --no-check-certificate --timeout=30 --tries=1 "$url"
     then
 	echo " ... wget failed: $url"
 
-	if ! test -f $archive
+	if ! test -f "$archive"
 	then
 	    # try go get from our own backup server
 	    echo $SAME_LINE "trying backup archive "
             filename=$(basename "$url")
-	    if ! wget --quiet --timeout=30 --tries=1 https://get-map.org/downloads/shapefile-backups/$filename
+	    if ! wget --quiet --timeout=30 --tries=1 https://get-map.org/downloads/shapefile-backups/"$filename"
 	    then
 	        # could not find it in any of the known places
 		# -> skip further processing, continue with next shapefile in list
@@ -139,7 +141,7 @@ do
 	fi
     fi
 
-    file_type=$(file -bi $archive | sed -e's/;.*$//g')
+    file_type=$(file -bi "$archive" | sed -e's/;.*$//g')
     case $file_type in
 	application/gzip)
         ;;
@@ -153,10 +155,10 @@ do
 	    # download is not a known archive type, so something seems
 	    # to have gone wrong and we try to roll back to the previous
 	    # downloaded version
-	    rm $archive
-	    if test -f $archive.1
+	    rm "$archive"
+	    if test -f "$archive".1
 	    then
-		mv $archive.1 $archive
+		mv "$archive".1 "$archive"
 	    fi
 	    echo " ... wrong file type $file_type"
 	    continue
@@ -165,15 +167,15 @@ do
 	
     # renew actual shapefile if a more recent version was downloaded (new backup exists)
     # or process shapefile archive (from download or cache) if actual shapefile not found
-    if [ \( -f $DOWNLOAD_DIR/$archive.1 \) -o \( ! -d $SHAPEFILE_DIR/$archbase \) ]
+    if [ \( -f "$DOWNLOAD_DIR"/"$archive".1 \) ] || [ \( ! -d "$SHAPEFILE_DIR"/"$archbase" \) ]
     then
 	echo $SAME_LINE " ... unpacking"
 
         # again: remove the backup file if it exists
-        rm -f $archive.1
+        rm -f "$archive".1
 
         # change workplace
-        cd $SHAPEFILE_DIR
+        cd "$SHAPEFILE_DIR"
 
         # create temporary workdir, we'll rename it on success later
         rm -rf tmp
@@ -181,21 +183,21 @@ do
         cd tmp
 
         # unpack downloaded archive
-	if [ $ext = 'zip' ]
+	if [ "$ext" = 'zip' ]
         then
-            unzip -q $DOWNLOAD_DIR/$archive
+            unzip -q "$DOWNLOAD_DIR"/"$archive"
         else
-	    tar -xf $DOWNLOAD_DIR/$archive
+	    tar -xf "$DOWNLOAD_DIR"/"$archive"
         fi
 
 	echo $SAME_LINE " ... indexing"
 	for shppath in $(find . -name '*.shp')
 	do
-	    shpfile=$(basename $shppath)
-	    shpdir=$(dirname $shppath)
+	    shpfile="$(basename "$shppath")"
+	    shpdir="$(dirname "$shppath")"
 	    (
-	      cd $shpdir
-	      shapeindex --shape_files $shpfile >/dev/null 2>/dev/null
+	      cd "$shpdir"
+	      shapeindex --shape_files "$shpfile" >/dev/null 2>/dev/null
 	    )
 	done
 
@@ -207,15 +209,15 @@ do
 	# right away, and we rename the tmpdir
         if [ $(ls | wc -l) -eq 1 ]
         then
-	    base=$(ls)
-	    rm -rf ../$archbase 
-	    mv $base ../$archbase
+	    base="$(ls)"
+	    rm -rf ../"$archbase" 
+	    mv "$base" ../"$archbase"
 	    cd ..
 	    rm -rf tmp 
         else
             cd ..
-	    rm -rf $archbase
-	    mv tmp $archbase
+	    rm -rf "$archbase"
+	    mv tmp "$archbase"
         fi
 	echo
     else
@@ -230,15 +232,15 @@ done
 echo; echo "Post-Processing"; echo
 
 # TODO: I don't remember why, and for what style, this recoding was actually necessary for
-cd $SHAPEFILE_DIR/ne_10m_populated_places
+cd "$SHAPEFILE_DIR"/ne_10m_populated_places
 ogr2ogr --config SHAPE_ENCODING UTF8 ne_10m_populated_places_fixed.shp ne_10m_populated_places.shp
 
 # some styles epect the mercator tiff files in the top level shapefile dir
-cd $SHAPEFILE_DIR
+cd "$SHAPEFILE_DIR"
 for a in mercator_tiffs/*.tif
 do 
-    rm -f $(basename $a)
-    ln -s $a .
+    rm -f "$(basename "$a")"
+    ln -s "$a" .
 done
 
 # the gmted shapefile dir is referenced by a different name than the archives basename
@@ -258,13 +260,13 @@ mkdir world_boundaries_new
 for shpdir in world_boundaries-spherical shoreline_300 ne_10m_populated_places ne_110m_admin_0_boundary_lines_land mercator_tiffs land-polygons-split-3857 simplified-land-polygons-complete-3857 processed_p
 do
 	# for each file in there
-	for file in $shpdir/*
+	for file in "$shpdir"/*
 	do
 		# create a symlink in the new world boundaries dir
 		# unless the same file name already exists in there
-		base=$(basename $file)
-		path=$(realpath $file)
-		ln -sf $path world_boundaries_new/$base
+		base=$(basename "$file")
+		path=$(realpath "$file")
+		ln -sf "$path" world_boundaries_new/"$base"
 	done
 done
 
@@ -272,9 +274,9 @@ done
 cd world_boundaries_new
 for source in ne_110m_admin_0_boundary_lines_land.*
 do
-	dest=$(echo $source | sed -e's/ne_110/110/g')
-	echo ln -sf $source $dest
-	ln -sf $source $dest
+	dest=$(echo "$source" | sed -e's/ne_110/110/g')
+	echo ln -sf "$source" "$dest"
+	ln -sf "$source" "$dest"
 done
 cd ..
 
@@ -288,5 +290,4 @@ mv world_boundaries_new world_boundaries
 
 echo "done"
 
-
-
+popd > /dev/null

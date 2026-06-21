@@ -8,13 +8,17 @@
 #
 #----------------------------------------------------
 
-    cd $STYLEDIR
 
-    git clone https://github.com/openstreetmap/mapnik-stylesheets mapnik2-osm
-    cd mapnik2-osm
-    ln -s $SHAPEFILE_DIR/world_boundaries .
+pushd . > /dev/null
 
-    cp $FILEDIR/styles/mapnik2-osm/* inc
+cd "$STYLEDIR"
 
-    cd ..
+git clone https://github.com/openstreetmap/mapnik-stylesheets mapnik2-osm
+cd mapnik2-osm
+ln -s "$SHAPEFILE_DIR"/world_boundaries .
 
+cp "$FILEDIR"/styles/mapnik2-osm/* inc
+
+cd ..
+
+popd > /dev/null

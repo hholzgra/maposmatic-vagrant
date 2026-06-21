@@ -5,7 +5,9 @@
 #
 #----------------------------------------------------
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 git clone --quiet https://github.com/hotosm/HDM-CartoCSS.git
 
@@ -16,11 +18,11 @@ sed -e"s|layer \~|tags->'layer' \~|g" \
     -e's|host: localhost|host: gis-db|g' \
     -e's|user: .*|user: maposmatic|g' \
     -e's|password: .*|password: secret|g' \
-    -e's|file:.*/land-polygons-split-3857.zip|file: '$SHAPEFILE_DIR'/land-polygons-split-3857/land_polygons.shp|g' \
-    -e's|file:.*/simplified-land-polygons-complete-3857.zip|file: '$SHAPEFILE_DIR'/simplified-land-polygons-complete-3857/simplified_land_polygons.shp|g' \
+    -e's|file:.*/land-polygons-split-3857.zip|file: '"$SHAPEFILE_DIR"'/land-polygons-split-3857/land_polygons.shp|g' \
+    -e's|file:.*/simplified-land-polygons-complete-3857.zip|file: '"$SHAPEFILE_DIR"'/simplified-land-polygons-complete-3857/simplified_land_polygons.shp|g' \
     < project.yml > project.mml
 
-carto --quiet --api $MAPNIK_VERSION_FOR_CARTO project.mml > osm.xml
+carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" project.mml > osm.xml
 
 # -e's|user: hot|user: maposmatic|g' \
 
@@ -32,3 +34,4 @@ carto --quiet --api $MAPNIK_VERSION_FOR_CARTO project.mml > osm.xml
 # ./hillshade_to_vrt.sh
 # ./merge_contour.sh
 
+popd > /dev/null

@@ -9,14 +9,14 @@
 # config tweaks
 
 # Keep for OS some free memory to prevent killing PostgreSQL by Out-Of-Memory Killer
-let Mem_OS=100000
-let Mem_DB=$MemTotal-$Mem_OS
-let Mem_1_5=$Mem_DB/5
-let Mem_1_10=$Mem_DB/10
+(( Mem_OS   = 100000 ))
+(( Mem_DB   = MemTotal - Mem_OS ))
+(( Mem_1_5  = Mem_DB / 5 ))
+(( Mem_1_10 = Mem_DB / 10 ))
 
 pg_confdir=/etc/postgresql/$(pg_conftool --short show cluster_name)/conf.d
 
-sed -e"s/@Mem_1_5@/$Mem_1_5/g" -e"s/@Mem_1_10@/$Mem_1_10/g" < "$FILEDIR"/config-files/postgresql-extra.conf > $pg_confdir/postgresql-extra.conf
+sed -e"s/@Mem_1_5@/$Mem_1_5/g" -e"s/@Mem_1_10@/$Mem_1_10/g" < "$FILEDIR"/config-files/postgresql-extra.conf > "$pg_confdir"/postgresql-extra.conf
 
 systemctl restart postgresql
 

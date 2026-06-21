@@ -1,5 +1,7 @@
 #! /bin/bash -e
 
+pushd . > /dev/null
+
 FILE="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 REPLICATION_BASE_URL="$(osmium fileinfo -g 'header.option.osmosis_replication_base_url' "${FILE}")"
 
@@ -10,7 +12,7 @@ else
 	REPLICATION_BASE_OPTION="-r $REPLICATION_BASE_URL"
 fi
 
-cd $STYLEDIR/
+cd "$STYLEDIR/"
 
 pip3 install  --break-system-packages \
   git+https://github.com/waymarkedtrails/osgende@master \
@@ -28,16 +30,16 @@ chown maposmatic symbols
 
 if ! test -z "$REPLICATION_BASE_URL"
 then
-    echo ${REPLICATION_BASE_URL} > "${OSMOSIS_DIFFIMPORT}/baseurl.txt"
+    echo "$REPLICATION_BASE_URL" > "$OSMOSIS_DIFFIMPORT/baseurl.txt"
 
     sed_opts=""
     sed_opts+="-e s|@INSTALLDIR@|$INSTALLDIR|g "
     sed_opts+="-e s|@INCDIR@|$INCDIR|g "
     sed_opts+="-e s|@STYLEDIR@|$STYLEDIR|g "
     sed_opts+="-e s|@PYTHON_VERSION@|$PYTHON_VERSION|g "
-    for file in $FILEDIR/systemd/waymarked-update.*
+    for file in "$FILEDIR"/systemd/waymarked-update.*
     do
-	sed $sed_opts < $file > /etc/systemd/system/$(basename $file)
+	sed $sed_opts < "$file" > /etc/systemd/system/"$(basename "$file")"
     done
 
     chmod 644 /etc/systemd/system/waymarked-update.*
@@ -45,3 +47,4 @@ then
     systemctl enable waymarked-update.timer
 fi
 
+popd > /dev/null

@@ -1,5 +1,9 @@
-#! /bin/bash
+#! /bin/bash -e
 
-cd $STYLEDIR/toner
+pushd . > /dev/null
 
-sudo -u maposmatic psql gis < sql/functions/highroad.sql 
+cd "$STYLEDIR"/toner
+
+sudo -u maposmatic psql gis --file=sql/functions/highroad.sql 
+
+popd > /dev/null

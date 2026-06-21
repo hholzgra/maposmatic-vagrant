@@ -5,7 +5,9 @@
 #
 #----------------------------------------------------
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 if ! test -d baumkarte
 then
 	git clone --quiet https://github.com/rudzick/Mymapnik_openstreetmap-carto baumkarte
@@ -14,9 +16,10 @@ fi
 
 cd baumkarte
 
-ln -s $SHAPEFILE_DIR data
+ln -s "$SHAPEFILE_DIR" data
 
-patch -p1 < $INCDIR/styles/baumkarte.patch
-carto --quiet --api $MAPNIK_VERSION_FOR_CARTO project.mml > baumkarte.xml
-php $FILEDIR/tools/postprocess-style.php baumkarte.xml
+# patch -p1 < "$INCDIR"/styles/baumkarte.patch
+carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" project.mml > baumkarte.xml
+php "$FILEDIR"/tools/postprocess-style.php baumkarte.xml
 
+popd > /dev/null

@@ -7,9 +7,12 @@
 #
 #----------------------------------------------------
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 git clone --quiet https://github.com/hholzgra/Mapnik-golf-overlay.git
 cd Mapnik-golf-overlay
 git checkout --quiet maposmatic
 
+popd > /dev/null

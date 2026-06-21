@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-pushd .
+pushd . > /dev/null
 
 DOWNLOAD_DIR=${CACHEDIR:-/vagrant/cache}/fonts
 mkdir -p "$DOWNLOAD_DIR"
@@ -13,4 +13,4 @@ wget --timestamping https://github.com/android/platform_frameworks_base/raw/mast
 
 cp DroidSansFallback.ttf $FONTDIR
 
-popd
+popd > /dev/null

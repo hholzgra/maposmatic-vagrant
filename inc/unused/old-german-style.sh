@@ -4,12 +4,14 @@
 # Old German style
 #
 #----------------------------------------------------
-   
+
+pushd . > /dev/null
+
 # we share boundaries with the "classic" mapnik OSM style
-ln -s $SHAPEFILE_DIR/world_boundaries/ .
+ln -s "$SHAPEFILE_DIR"/world_boundaries/ .
    
 # check out current stylesheet source
-cd $STYLEDIR
+cd "$STYLEDIR"
 svn checkout http://svn.openstreetmap.org/applications/rendering/mapnik-german/
 cd mapnik-german
 
@@ -31,13 +33,15 @@ cd ..
 sed -ie "s/ele,'FM9999D99'/ele::float,'FM9999D99'/g" osm-de.xml
 
 # set up the actual stylesheet
-$FILEDIR/tools/generate_xml.py \
+# TODO db hardcoded
+"$FILEDIR"/tools/generate_xml.py \
           --host 'localhost' \
           --port 5432 \
           --dbname gis \
           --prefix planet_osm \
           --user maposmatic \
           --password 'secret' \
-          --inc $(pwd)/inc-de \
-          --world_boundaries $SHAPEFILE_DIR/world_boundaries
+          --inc "$(pwd)/inc-de" \
+          --world_boundaries "$SHAPEFILE_DIR"/world_boundaries
 
+popd > /dev/null

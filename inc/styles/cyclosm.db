@@ -1,8 +1,12 @@
-#! /bin/bash
+#! /bin/bash -e
 
-cd $STYLEDIR/cyclosm-cartocss-style
+pushd . > /dev/null
 
-sudo -u maposmatic psql gis < views.sql
+cd "$STYLEDIR"/cyclosm-cartocss-style
+
+sudo -u maposmatic psql gis --file=views.sql
 
 # style expects contours table under a different name, and ele column with different type
 sudo -u maposmatic psql contours -c "CREATE OR REPLACE VIEW planet_osm_line AS SELECT gid, id, ele::int AS ele, way FROM contours;"
+
+popd > /dev/null

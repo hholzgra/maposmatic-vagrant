@@ -1,12 +1,14 @@
 #! /bin/bash -e
 
+pushd . > /dev/null
+
 DOWNLOAD_DIR=${CACHEDIR:-/vagrant/cache}/fonts
-mkdir -p $DOWNLOAD_DIR
+mkdir -p "$DOWNLOAD_DIR"
 
 FONTDIR=/usr/local/share/fonts/truetype/open-sans
-mkdir -p $FONTDIR
+mkdir -p "$FONTDIR"
 
-cd $DOWNLOAD_DIR
+cd "$DOWNLOAD_DIR"
 
 # upstream is https://www.opensans.com/download/
 # but is currently broken (2025-03-31)
@@ -16,6 +18,8 @@ cd $DOWNLOAD_DIR
 wget --timestamping https://get-map.org/downloads/open-sans.zip -O open-sans.zip
 wget --timestamping https://get-map.org/downloads/open-sans-condensed.zip -O open-sans-condensed.zip
 
-cd $FONTDIR
-unzip -qf $DOWNLOAD_DIR/open-sans.zip 
-unzip -qf $DOWNLOAD_DIR/open-sans-condensed.zip
+cd "$FONTDIR"
+unzip -qf "$DOWNLOAD_DIR"/open-sans.zip 
+unzip -qf "$DOWNLOAD_DIR"/open-sans-condensed.zip
+
+popd > /dev/null

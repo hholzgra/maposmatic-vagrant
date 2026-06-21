@@ -1,4 +1,4 @@
 #! /bin/bash -e
 
-cp $FILEDIR/sudoers/* /etc/sudoers.d/
+cp "$FILEDIR"/sudoers/* /etc/sudoers.d/
 

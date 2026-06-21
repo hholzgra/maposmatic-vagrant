@@ -5,7 +5,9 @@
 #
 #----------------------------------------------------
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 # correct HikeBikeMap style is on DropBox:
 # https://www.dropbox.com/s/ykarpeq2jr0vh6e/hikebikemap-carto-0.9.tbz
@@ -20,7 +22,7 @@ mv hikebikemap-carto-0.9 hikebikemap-carto
 cd hikebikemap-carto/
 
 rm -rf data
-ln -s $SHAPEFILE_DIR data
+ln -s "$SHAPEFILE_DIR" data
 
 # remove deprecated name attributes from layers to silence carto warnings
 sed -i \
@@ -29,5 +31,6 @@ sed -i \
     project.mml
 
 # convert CartoCSS to Mapnil XML
-carto --quiet --api $MAPNIK_VERSION_FOR_CARTO project.mml > osm.xml
+carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" project.mml > osm.xml
 
+popd > /dev/null
