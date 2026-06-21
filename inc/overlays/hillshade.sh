@@ -1,7 +1,11 @@
 #! /bin/bash -e
 
-mkdir -p $STYLEDIR/hillshade-overlay
-cd $STYLEDIR/hillshade-overlay
+pushd . > /dev/null
 
-cp $FILEDIR/styles/hillshade.xml .
-ln -s $INSTALLDIR/elevation-data/dem .
+mkdir -p "$STYLEDIR"/hillshade-overlay
+cd "$STYLEDIR"/hillshade-overlay
+
+cp "$FILEDIR"/styles/hillshade.xml .
+ln -s "$INSTALLDIR"/elevation-data/dem .
+
+popd > /dev/null

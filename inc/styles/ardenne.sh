@@ -3,7 +3,9 @@
 # OpenArdenneMap - Belgian topographic map style
 #----------------------------------------------------
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 git clone --quiet https://github.com/nobohan/OpenArdenneMap
 cd OpenArdenneMap
 
@@ -34,7 +36,8 @@ sed -i \
     -e 's|/mnt/tera/ChampsLibres/Projets/OSM/CyclOSM/hillshade/data/dem_be_10x10_hillshade_semi_transparent_3857.tif|../hillshade/hillshade.tif|g' \
     project.mml
 
-carto --quiet --api $MAPNIK_VERSION_FOR_CARTO project.mml > OpenArdenneMap.xml
+carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" project.mml > OpenArdenneMap.xml
 
-php $FILEDIR/tools/postprocess-style.php OpenArdenneMap.xml
+php "$FILEDIR"/tools/postprocess-style.php OpenArdenneMap.xml
 
+popd > /dev/null

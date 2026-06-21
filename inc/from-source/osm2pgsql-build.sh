@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-pushd
+pushd . > /dev/null
 
 cd "$INSTALLDIR"
 
@@ -16,4 +16,4 @@ cd _build
 
 cmake .. >/dev/null && make -j"$(nproc)" install >/dev/null
 
-popd
+popd > /dev/null

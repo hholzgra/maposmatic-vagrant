@@ -5,7 +5,9 @@
 #
 #----------------------------------------------------
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 # fetch current stylesheet version
 git clone --quiet https://github.com/hholzgra/MapQuest-Mapnik-Style.git
@@ -13,10 +15,11 @@ git clone --quiet https://github.com/hholzgra/MapQuest-Mapnik-Style.git
 cd MapQuest-Mapnik-Style
 
 # fetch additional files required by this style
-ln -s $SHAPEFILE_DIR/world_boundaries/ .
+ln -s "$SHAPEFILE_DIR"/world_boundaries/ .
 
 # generate stylesheet XML
-$FILEDIR/tools/generate_xml.py \
+# TODO DB hardcoded?
+"$FILEDIR"/tools/generate_xml.py \
        --inc mapquest_inc \
        --symbols mapquest_symbols \
        --dbname gis \
@@ -26,7 +29,7 @@ $FILEDIR/tools/generate_xml.py \
        --password secret \
        > /dev/null
 
-$FILEDIR/tools/generate_xml.py \
+"$FILEDIR"/tools/generate_xml.py \
        --inc hybrid_inc \
        --symbols hybrid_symbols \
        --dbname gis \
@@ -36,3 +39,4 @@ $FILEDIR/tools/generate_xml.py \
        --password secret \
        > /dev/null
 
+popd > /dev/null

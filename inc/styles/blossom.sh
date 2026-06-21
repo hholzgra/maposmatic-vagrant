@@ -1,6 +1,8 @@
 #! /bin/bash -e
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 git clone --quiet https://github.com/stekhn/blossom
 
@@ -15,6 +17,7 @@ sed -ie 's/http.*10m-populated-places-simple.zip"/\/home\/maposmatic\/shapefiles
 sed -ie 's/"srs": ""/"srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"/g' osm.mml
 sed -ie 's/"type": "postgis"/"type": "postgis", "host": "gis-db", "user": "maposmatic", "password": "secret"/g' osm.mml
 
-carto --quiet --api $MAPNIK_VERSION_FOR_CARTO osm.mml  > osm.xml
-php $FILEDIR/tools/postprocess-style.php osm.xml
+carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" osm.mml  > osm.xml
+php "$FILEDIR"/tools/postprocess-style.php osm.xml
 
+popd > /dev/null

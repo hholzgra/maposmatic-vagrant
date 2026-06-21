@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-pushd .
+pushd . > /dev/null
 
 DOWNLOAD_DIR=${CACHEDIR:-/vagrant/cache}/fonts
 mkdir -p "$DOWNLOAD_DIR"
@@ -14,4 +14,4 @@ wget --timestamping https://www.fontsquirrel.com/fonts/download/pt-sans/pt-sans.
 cd $FONTDIR
 unzip -qf $DOWNLOAD_DIR/pt-sans.zip
 
-popd
+popd > /dev/null

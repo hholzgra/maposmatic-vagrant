@@ -1,12 +1,14 @@
 #! /bin/bash -e
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 git clone --quiet https://github.com/yohanboniface/OpenRiverboatMap.git
 
 cd OpenRiverboatMap
 
-ln -s $SHAPEFILE_DIR data
+ln -s "$SHAPEFILE_DIR" data
 
 sed -e 's/dbname: osm/dbname: gis/g' \
     -e "s/host: ''/host: gis-db/g" \
@@ -18,5 +20,6 @@ sed -e 's/dbname: osm/dbname: gis/g' \
     -e '/"name":/d' \
     < project.yml > processed.mml
 
-carto --quiet --api $MAPNIK_VERSION_FOR_CARTO processed.mml > openriverboatmap.xml
+carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" processed.mml > openriverboatmap.xml
 
+popd > /dev/null

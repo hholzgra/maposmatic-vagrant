@@ -1,11 +1,13 @@
-#! /bin/bash
+#! /bin/bash -e
 
-cd $STYLEDIR/OpenRailwayMap-CartoCSS
+pushd . > /dev/null
 
-sudo -u maposmatic psql gis < sql/osm_carto_views.sql
-sudo -u maposmatic psql gis < sql/functions.sql
-sudo -u maposmatic psql gis < sql/get_station_importance.sql
+cd "$STYLEDIR"/OpenRailwayMap-CartoCSS
 
-sudo -u maposmatic psql gis < $INCDIR/overlays/openrailway.sql
+sudo -u maposmatic psql gis --file=sql/osm_carto_views.sql
+sudo -u maposmatic psql gis --file=sql/functions.sql
+sudo -u maposmatic psql gis --file=sql/get_station_importance.sql
 
+sudo -u maposmatic psql gis --file="$INCDIR"/overlays/openrailway.sql
 
+popd > /dev/null

@@ -2,28 +2,20 @@
 
 . /etc/profile.d/mapospatic.sh
 
-cd $STYLEDIR/waymarkedtrails-backend
-
-IMPORT_SIZE=60
-
-REP_SERVICE=$(cat $INSTALLDIR/osm2pgsql-import/replication_url)
-
-PROCESSES=2
+cd "$STYLEDIR"/waymarkedtrails-backend
 
 OPTS=""
 #OPTS="-S 5000"
 
-FLAT_NODE_FILE=$INSTALLDIR/import/waymarkedtrails/flat-nodes.dat
+FLAT_NODE_FILE="$INSTALLDIR"/import/waymarkedtrails/flat-nodes.dat
 
 echo "== Main DB Update =="
-wmt-makedb $OPTS -j $(nproc) -n $FLAT_NODE_FILE db update
-$OPTS || exit
-echo
+wmt-makedb "$OPTS" -j "$(nproc)" -n "$FLAT_NODE_FILE" db update
 
 for style in hiking cycling mtb riding skating slopes # running
 do
   echo "== $style DB Update =="
-  wmt-makedb -j $(nproc) -n $FLAT_NODE_FILE $style update || exit
+  wmt-makedb -j "$(nproc)" -n "$FLAT_NODE_FILE" $style update
   echo
 done
 

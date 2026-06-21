@@ -19,10 +19,10 @@ cp /usr/share/i18n/SUPPORTED /etc/locale.gen
 mkdir /tmp/locales.$$
 (
   cd /tmp/locales.$$
-  echo 'echo; echo /usr/bin/localedef "$@"' > localedef
+  echo 'echo; echo /usr/bin/localedef "$@"' > ./localedef
   chmod a+x localedef
   export PATH=.:$PATH
   export LANG=C
   export LC_ALL=C
-  locale-gen | egrep "^/usr" | parallel && rm -rf /tmp/locales.$$
+  locale-gen | grep -E "^/usr" | parallel && rm -rf /tmp/locales.$$
 ) 

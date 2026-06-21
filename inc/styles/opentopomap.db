@@ -1,23 +1,24 @@
-#! /bin/bash
+#! /bin/bash -e
 
-DBNAME=${DBNAME:-gis}
-export $DBNAME
+pushd . > /dev/null
 
-cd $STYLEDIR/OpenTopoMap
+export DBNAME=${DBNAME:-gis}
+
+cd "$STYLEDIR"/OpenTopoMap
 
 cd mapnik
 
 echo "station direction"
-sudo -u maposmatic psql $DBNAME < tools/stationdirection.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --file=tools/stationdirection.sql >/dev/null
 
 echo "view point direction"
-sudo -u maposmatic psql $DBNAME < tools/viewpointdirection.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --file=tools/viewpointdirection.sql >/dev/null
 
 echo "pitchicon"
-sudo -u maposmatic psql $DBNAME < tools/pitchicon.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --file=tools/pitchicon.sql >/dev/null
 
 echo "update area labels"
-sudo -u maposmatic psql $DBNAME < tools/arealabel.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --file=tools/arealabel.sql >/dev/null
 
 
 cd ..
@@ -31,3 +32,4 @@ sudo --user maposmatic --preserve-env=DBNAME mapnik/tools/update_saddles.sh >/de
 echo "update isolations"
 sudo --user maposmatic --preserve-env=DBNAME mapnik/tools/update_isolations.sh >/dev/null
 
+popd > /dev/null

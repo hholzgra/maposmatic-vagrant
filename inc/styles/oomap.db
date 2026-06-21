@@ -1,6 +1,10 @@
-#! /bin/bash
+#! /bin/bash -e
 
-cd $STYLEDIR/oomap
+pushd . > /dev/null
 
-sudo -u maposmatic psql gis < $INCDIR/styles/oomap.sql
-shp2pgsql -g way $SHAPEFILE_DIR/water-polygons-split-3857/water_polygons.shp public.water | sudo -u maposmatic psql gis > /dev/null
+cd "$STYLEDIR"/oomap
+
+sudo -u maposmatic psql gis --file="$INCDIR"/styles/oomap.sql
+shp2pgsql -g way "$SHAPEFILE_DIR"/water-polygons-split-3857/water_polygons.shp public.water | sudo -u maposmatic psql gis > /dev/null
+
+popd > /dev/null

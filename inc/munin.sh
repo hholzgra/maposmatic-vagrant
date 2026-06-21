@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-pushd
+pushd . > /dev/null
 
 FILEDIR=${FILEDIR:-/vagrant/files}
 
@@ -12,4 +12,4 @@ sed -i -e's/Require local/Require all granted/g' apache24.conf
 
 systemctl restart apache2 munin-node
 
-popd
+popd > /dev/null

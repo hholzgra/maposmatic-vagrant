@@ -1,7 +1,9 @@
 #! /bin/bash -e
 
-mkdir $INSTALLDIR/umap
-cd $INSTALLDIR/umap
+pushd . > /dev/null
+
+mkdir "$INSTALLDIR"/umap
+cd "$INSTALLDIR"/umap
 mkdir www
 mkdir -p var/data
 
@@ -10,9 +12,9 @@ source venv/bin/activate
 
 pip3 install umap-project
 
-cp $FILEDIR/config-files/umap-settings.py local-settings.py
+cp "$FILEDIR"/config-files/umap-settings.py local-settings.py
 
-export UMAP_SETTINGS=`pwd`/local_settings.py
+export UMAP_SETTINGS="$PWD/local_settings.py"
 
 umap migrate
 
@@ -21,4 +23,6 @@ umap collectstatic
 umap createsuperuser
 
 umap runserver 0.0.0.0:8090 &
+
+popd > /dev/null
 

@@ -1,6 +1,9 @@
 #! /bin/bash -e
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 git clone --quiet https://github.com/hholzgra/Mapnik-housenumbers
 
+popd > /dev/null

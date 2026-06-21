@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-pushd .
+pushd . > /dev/null
 
 cd "$STYLEDIR"
 
@@ -14,5 +14,6 @@ ln -s "$SHAPEFILE_DIR"/gmted25 data/gmted
 sed -e '/"name":/d' \
     -e 's/"type": "postgis"/"type": "postgis", "host": "gis-db", "user": "maposmatic", "password": "secret"/g' \
     < project.mml > osm.mml
-carto --quiet --api $MAPNIK_VERSION_FOR_CARTO osm.mml > veloroad.xml
+carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" osm.mml > veloroad.xml
 
+popd > /dev/null

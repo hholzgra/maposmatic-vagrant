@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-pushd
+pushd . > /dev/null
 
 cd "$INSTALLDIR"
 
@@ -12,4 +12,4 @@ tar -xvf phyghtmap_2.21.orig.tar.gz
 cd phyghtmap-2.21
 python3 setup.py install
 
-popd
+popd > /dev/null

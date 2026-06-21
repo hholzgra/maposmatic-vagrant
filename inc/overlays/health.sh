@@ -7,11 +7,13 @@
 #
 #----------------------------------------------------
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 git clone --quiet https://github.com/hholzgra/Mapnik-health-overlay.git
 
 cd Mapnik-health-overlay
-cp $FILEDIR/config-files/datasource-settings.xml.inc inc
-cd ..
+cp "$FILEDIR"/config-files/datasource-settings.xml.inc inc
 
+popd > /dev/null

@@ -1,6 +1,8 @@
 #! /bin/bash -e
 
-cd $STYLEDIR
+pushd . > /dev/null
+
+cd "$STYLEDIR"
 
 git clone https://github.com/hholzgra/oomap
 
@@ -12,9 +14,11 @@ git checkout maposmatic
 
 cd maptiler/
 
-for file in $FILEDIR/styles/oomap/*
+for file in "$FILEDIR"/styles/oomap/*
 do
-	sed -e "s|@STYLEDIR@|$STYLEDIR|g" < $file > styles/inc/$(basename $file)
+	sed -e "s|@STYLEDIR@|$STYLEDIR|g" < "$file" > styles/inc/"$(basename "$file")"
 done
 
-ln -s $SHAPEFILE_DIR .
+ln -s "$SHAPEFILE_DIR" .
+
+popd > /dev/null

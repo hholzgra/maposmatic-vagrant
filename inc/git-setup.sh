@@ -1,8 +1,8 @@
 #! /bin/bash -e
 
-mkdir -p $VAGRANT/git-log
+mkdir -p "$VAGRANT"/git-log
 
-git config --global init.templatedir $FILEDIR/git-templates
+git config --global init.templatedir "$FILEDIR"/git-templates
 
 git config --global advice.detachedHead false
 
