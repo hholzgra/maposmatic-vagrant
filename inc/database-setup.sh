@@ -8,6 +8,9 @@
 
 # config tweaks
 
+# stop executing SQL scripts on error and return non-zero exit code
+echo "\set ON_ERROR_STOP on" >> /etc/postgresql-common/psqlrc
+
 # Keep for OS some free memory to prevent killing PostgreSQL by Out-Of-Memory Killer
 (( Mem_OS   = 100000 ))
 (( Mem_DB   = MemTotal - Mem_OS ))
