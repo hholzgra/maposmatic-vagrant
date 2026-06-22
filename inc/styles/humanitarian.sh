@@ -7,6 +7,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 
 git clone --quiet https://github.com/hotosm/HDM-CartoCSS.git
@@ -14,7 +16,7 @@ git clone --quiet https://github.com/hotosm/HDM-CartoCSS.git
 cd HDM-CartoCSS
 
 sed -e"s|layer \~|tags->'layer' \~|g" \
-    -e's|dbname: osm|dbname: gis|g' \
+    -e's|dbname: osm|dbname: '"$DBNAME"'|g' \
     -e's|host: localhost|host: gis-db|g' \
     -e's|user: .*|user: maposmatic|g' \
     -e's|password: .*|password: secret|g' \

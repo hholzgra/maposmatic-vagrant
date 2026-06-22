@@ -7,6 +7,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 
 # we need to add the MapOSMatic specific
@@ -18,7 +20,7 @@ cd "$INSTALLDIR"/ocitysmap/stylesheet/pierre-orange
 
 # TODO db hardcoded?
 "$FILEDIR"/tools/generate_xml.py \
-       --dbname gis \
+       --dbname "$DBNAME" \
        --host 'localhost' \
        --user maposmatic \
        --port 5432 \

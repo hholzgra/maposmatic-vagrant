@@ -7,6 +7,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 
 # configure the actual stylesheet
@@ -14,7 +16,7 @@ cd ../ocitysmap/stylesheet/maposmatic-printable
 
 # TODO db hardcoded?
 "$FILEDIR"/tools/generate_xml.py \
-       --dbname gis \
+       --dbname "$DBNAME" \
        --host 'localhost' \
        --user maposmatic \
        --port 5432 \

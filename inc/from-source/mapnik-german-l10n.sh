@@ -2,14 +2,16 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 #-------------------------------------------------------
 #
 # contrib extensions required by osml10n extension
 #
 #--------------------------------------------------------
 
-sudo --user=maposmatic psql --dbname=gis --command="CREATE EXTENSION fuzzystrmatch"
-sudo --user=maposmatic psql --dbname=gis --command="CREATE EXTENSION unaccent"
+sudo --user=maposmatic psql --dbname="$DBNAME" --command="CREATE EXTENSION fuzzystrmatch"
+sudo --user=maposmatic psql --dbname="$DBNAME" --command="CREATE EXTENSION unaccent"
 
 #----------------------------------------------------------
 #
@@ -30,6 +32,6 @@ do
 	make $target.html 2>/dev/null
 done
 make install
-sudo --user=maposmatic psql --dbname=gis --command="CREATE EXTENSION osml10n"
+sudo --user=maposmatic psql --dbname="$DBNAME" --command="CREATE EXTENSION osml10n"
 
 popd > /dev/null

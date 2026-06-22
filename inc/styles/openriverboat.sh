@@ -2,6 +2,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 
 git clone --quiet https://github.com/yohanboniface/OpenRiverboatMap.git
@@ -10,7 +12,7 @@ cd OpenRiverboatMap
 
 ln -s "$SHAPEFILE_DIR" data
 
-sed -e 's/dbname: osm/dbname: gis/g' \
+sed -e 's/dbname: osm/dbname: '"$DBNAME"'/g' \
     -e "s/host: ''/host: gis-db/g" \
     -e 's/user: ybon/user: maposmatic/g' \
     -e 's/password: null/password: secret/g' \

@@ -2,9 +2,11 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"/oomap
 
-sudo -u maposmatic psql gis --file="$INCDIR"/styles/oomap.sql
-shp2pgsql -g way "$SHAPEFILE_DIR"/water-polygons-split-3857/water_polygons.shp public.water | sudo -u maposmatic psql gis > /dev/null
+sudo -u maposmatic psql "$DBNAME" --file="$INCDIR"/styles/oomap.sql
+shp2pgsql -g way "$SHAPEFILE_DIR"/water-polygons-split-3857/water_polygons.shp public.water | sudo -u maposmatic psql "$DBNAME" > /dev/null
 
 popd > /dev/null

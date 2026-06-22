@@ -2,6 +2,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 
 git clone --quiet https://github.com/imagico/osm-carto-alternative-colors
@@ -13,7 +15,7 @@ cd osm-carto-alternative-colors
 for sql in ac-light line-widths-generated scale_factor roads z 
 do
     echo "Importing $sql"
-    sudo -u maposmatic psql gis "sql/$sql.sql"
+    sudo -u maposmatic psql "$DBNAME" "sql/$sql.sql"
 done
 
 ln -s "$SHAPEFILE_DIR" data

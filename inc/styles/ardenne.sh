@@ -5,6 +5,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 git clone --quiet https://github.com/nobohan/OpenArdenneMap
 cd OpenArdenneMap
@@ -31,7 +33,7 @@ mmv 'beautiful-contour-belgium.*' 'contours_3857.#1'
 cd ../osm2pgsql
 
 sed -i \
-    -e 's/"dbname": "osmpg_db"/"dbname": "gis"/g' \
+    -e 's/"dbname": "osmpg_db"/"dbname": "'"$DBNAME"'"/g' \
     -e 's/"type": "postgis"/"type": "postgis", "host": "gis-db", "user": "maposmatic", "password": "secret"/g' \
     -e 's|/mnt/tera/ChampsLibres/Projets/OSM/CyclOSM/hillshade/data/dem_be_10x10_hillshade_semi_transparent_3857.tif|../hillshade/hillshade.tif|g' \
     project.mml

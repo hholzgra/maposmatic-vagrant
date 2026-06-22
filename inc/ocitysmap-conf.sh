@@ -2,6 +2,7 @@
 
 CONF=${INSTALLDIR:-/home/maposmatic}/.ocitysmap.conf
 INCDIR=${INCDIR:-/vagrant/inc}
+DBNAME="${DBNAMES[classic]:-gis}"
 
 # header part is constant
 # TODO: read from /vagrant/files/... instead?
@@ -19,7 +20,7 @@ cat <<EOF >> "$CONF"
 host=localhost
 user=maposmatic
 password=secret
-dbname=gis
+dbname="$DBNAME"
 EOF
 
 echo >> "$CONF"

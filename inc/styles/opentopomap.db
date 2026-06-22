@@ -2,23 +2,23 @@
 
 pushd . > /dev/null
 
-export DBNAME=${DBNAME:-gis}
+export DBNAME="${DBNAMES[flex]:-gis}"
 
 cd "$STYLEDIR"/OpenTopoMap
 
 cd mapnik
 
 echo "station direction"
-sudo -u maposmatic psql "$DBNAME" --file=tools/stationdirection.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --set=ON_ERROR_STOP=1 --file=tools/stationdirection.sql >/dev/null
 
 echo "view point direction"
-sudo -u maposmatic psql "$DBNAME" --file=tools/viewpointdirection.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --set=ON_ERROR_STOP=1 --file=tools/viewpointdirection.sql >/dev/null
 
 echo "pitchicon"
-sudo -u maposmatic psql "$DBNAME" --file=tools/pitchicon.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --set=ON_ERROR_STOP=1 --file=tools/pitchicon.sql >/dev/null
 
 echo "update area labels"
-sudo -u maposmatic psql "$DBNAME" --file=tools/arealabel.sql >/dev/null
+sudo -u maposmatic psql "$DBNAME" --set=ON_ERROR_STOP=1 --file=tools/arealabel.sql >/dev/null
 
 
 cd ..

@@ -7,7 +7,7 @@
 
 pushd . > /dev/null
 
-DBNAME="${DBNAME:-osm2pgsql_flex}"
+DBNAME="${DBNAMES[flex]:-osm2pgsql_flex}"
 OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
 STYLE_NAME="baumkarte"

@@ -10,7 +10,7 @@ pushd . > /dev/null
 FILEDIR=${FILEDIR:-/vagrant/files}
 OSM_EXTRACT="${OSM_EXTRACT:-/vagrant/data.osm.pbf}"
 
-DBNAME=gis
+DBNAME="${DBNAMES[classic]:-gis}"
 
 IMPORTDIR="$INSTALLDIR"/import/osm2pgsql
 mkdir -p "$IMPORTDIR"
@@ -57,7 +57,7 @@ for dir in db_indexes db_functions db_views
 do
   for sql in "$FILEDIR"/database/"$dir"/*.sql
   do
-    sudo -u maposmatic psql gis -f "$sql"
+    sudo -u maposmatic psql "$DBNAME" -f "$sql"
   done
 done
 

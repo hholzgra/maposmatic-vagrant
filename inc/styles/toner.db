@@ -2,8 +2,10 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"/toner
 
-sudo -u maposmatic psql gis --file=sql/functions/highroad.sql 
+sudo -u maposmatic psql "$DBNAME" --file=sql/functions/highroad.sql 
 
 popd > /dev/null
