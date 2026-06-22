@@ -8,7 +8,13 @@ cd "$STYLEDIR"/OpenRailwayMap-CartoCSS
 
 sudo -u maposmatic psql $DBNAME --file=sql/osm_carto_views.sql
 sudo -u maposmatic psql $DBNAME --file=sql/functions.sql
-sudo -u maposmatic psql $DBNAME --file=sql/get_station_importance.sql
+
+# this view has a known error we need to ignore, due to the way
+# we have set up the database tables as actual views it throws
+#
+# ERROR:  cannot create index on relation "planet_osm_point"
+# DETAIL:  This operation is not supported for views.
+sudo -u maposmatic psql $DBNAME --no-psqlrc --file=sql/get_station_importance.sql
 
 sudo -u maposmatic psql $DBNAME --file="$INCDIR"/overlays/openrailway.sql
 
