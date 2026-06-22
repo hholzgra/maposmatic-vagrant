@@ -20,7 +20,7 @@ cat <<EOF >> "$CONF"
 host=localhost
 user=maposmatic
 password=secret
-dbname="$DBNAME"
+dbname=$DBNAME
 EOF
 
 echo >> "$CONF"
