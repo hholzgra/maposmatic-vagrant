@@ -7,7 +7,7 @@ CONTOURS="${DBNAMES[contours]:-contours}"
 
 cd "$STYLEDIR"/cyclosm-cartocss-style
 
-sudo -u maposmatic psql "$DBNAME" --file=views.sql
+sed -e's/CASE WHEN layer/CASE WHEN layer::integer/g" < views.sql | sudo -u maposmatic psql "$DBNAME"
 
 # style expects contours table under a different name, and ele column with different type
 sudo -u maposmatic psql "$CONTOURS" -c "CREATE OR REPLACE VIEW planet_osm_line AS SELECT gid, id, ele::int AS ele, way FROM contours;"
