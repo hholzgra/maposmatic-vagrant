@@ -2,11 +2,13 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"/openptmap
 
 for sql in views/*.sql
 do
-	psql gis < "$sql"
+	psql "$DBNAME" < "$sql"
 done
 
 popd > /dev/null

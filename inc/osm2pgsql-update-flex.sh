@@ -2,7 +2,7 @@
 
 pushd . > /dev/null
 
-DBNAME=osm2pgsql_flex
+DBNAME="${DBNAMES[flex]:-osm2pgsql_flex}"
 OSM2PGSQL=/usr/local/bin/osm2pgsql
 
 DIR="$INSTALLDIR"/import/osm2pgsql-flex

@@ -2,6 +2,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 
 git clone --quiet https://github.com/cquest/osmfr-cartocss.git
@@ -12,7 +14,7 @@ ln -s "$SHAPEFILE_DIR" data
 
 sed -e '/\sname:/d' \
     -e 's/        "type": "postgis",/        "type": "postgis",\n        "host": "gis-db",\n        "user": "maposmatic",\n        "password": "secret",/g' \
-    -e 's/dbname:.*/dbname: "gis"/' \
+    -e 's/dbname:.*/dbname: "'"$DBNAME"'"/' \
     < project.mml > osm.mml
 carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" osm.mml > osm.xml
 

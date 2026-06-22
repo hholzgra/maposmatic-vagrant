@@ -214,6 +214,11 @@ systemctl daemon-reload
 sed -ie 's/localhost/localhost gis-db/g' /etc/hosts
 
 banner "db setup"
+declare -A DBNAMES
+DBNAMES[classic]="gis"
+DBNAMES[flex]="osm2pgsql_flex"
+DBNAMES[waymarked]="planet"
+export DBNAMES
 . $INCDIR/database-setup.sh
 
 banner "places db"

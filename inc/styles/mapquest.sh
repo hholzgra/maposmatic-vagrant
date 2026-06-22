@@ -7,6 +7,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"
 
 # fetch current stylesheet version
@@ -22,8 +24,8 @@ ln -s "$SHAPEFILE_DIR"/world_boundaries/ .
 "$FILEDIR"/tools/generate_xml.py \
        --inc mapquest_inc \
        --symbols mapquest_symbols \
-       --dbname gis \
-       --host 'localhost' \
+       --dbname "$DBNAME" \
+       --host 'gis-db' \
        --user maposmatic \
        --port 5432 \
        --password secret \
@@ -32,7 +34,7 @@ ln -s "$SHAPEFILE_DIR"/world_boundaries/ .
 "$FILEDIR"/tools/generate_xml.py \
        --inc hybrid_inc \
        --symbols hybrid_symbols \
-       --dbname gis \
+       --dbname "$DBNAME" \
        --host 'localhost' \
        --user maposmatic \
        --port 5432 \

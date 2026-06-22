@@ -7,6 +7,8 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 # we share boundaries with the "classic" mapnik OSM style
 ln -s "$SHAPEFILE_DIR"/world_boundaries/ .
    
@@ -19,14 +21,14 @@ cd mapnik-german
 
 cd utf8translit
 make install
-sudo -u maposmatic psql gis --command "CREATE FUNCTION transliterate(text) RETURNS text AS 'utf8translit', 'transliterate' LANGUAGE C STRICT;" 
+sudo -u maposmatic psql "$DBNAME" --command "CREATE FUNCTION transliterate(text) RETURNS text AS 'utf8translit', 'transliterate' LANGUAGE C STRICT;" 
 
 cd ..
 
 # create some extra database views
 # for sql in views/*.sql
 # do
-#     sudo -u maposmatic psql gis < $sql
+#     sudo -u maposmatic psql "$DBNAME" < $sql
 # done
 
 # fix a SQL problem in the stylesheet:
@@ -37,7 +39,7 @@ sed -ie "s/ele,'FM9999D99'/ele::float,'FM9999D99'/g" osm-de.xml
 "$FILEDIR"/tools/generate_xml.py \
           --host 'localhost' \
           --port 5432 \
-          --dbname gis \
+          --dbname "$DBNAME" \
           --prefix planet_osm \
           --user maposmatic \
           --password 'secret' \

@@ -2,10 +2,13 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"/Mapnik-fire-overlay
+
 for f in sql-functions/*.sql
 do
-    sudo -u maposmatic psql gis --file="$f"
+    sudo -u maposmatic psql "$DBNAME" --file="$f"
 done
 
 popd > /dev/null

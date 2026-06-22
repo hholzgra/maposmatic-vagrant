@@ -2,12 +2,14 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$INSTALLDIR"
 
 # read SRTM 90m zone name -> area mapping table
 echo "Importing SRTM zone database"
 # TODO db hardcoded
-sudo -u maposmatic psql gis --file="$FILEDIR"/database/db_dumps/srtm_zones.sql > /dev/null
+sudo -u maposmatic psql "$DBNAME" --file="$FILEDIR"/database/db_dumps/srtm_zones.sql > /dev/null
 
 mkdir -p elevation-data
 cd elevation-data
@@ -29,7 +31,7 @@ eval b="$bbox"
 polygon="POLYGON((${b[1]} ${b[0]}, ${b[1]} ${b[2]}, ${b[3]} ${b[2]}, ${b[3]} ${b[0]}, ${b[1]} ${b[0]}))"
 
 # now download all zones the import bounding box overlaps with
-for zone in $(psql gis --tuples-only --command="select zone from srtm_zones where ST_INTERSECTS(way, ST_GeomFromText('$polygon', 4326))")
+for zone in $(psql "$DBNAME" --tuples-only --command="select zone from srtm_zones where ST_INTERSECTS(way, ST_GeomFromText('$polygon', 4326))")
 do
     CACHEFILE="$CACHEDIR"/srtm-data/"$zone".zip
     SRTM_URL=http://viewfinderpanoramas.org/dem3/"$zone".zip
@@ -173,7 +175,7 @@ rm jobs.txt
 
 # set up countours database and table schema
 echo "create contour db"
-sudo -u maposmatic psql --quiet --file="$FILEDIR"/database/db_dumps/contours_schema.sql gis
+sudo -u maposmatic psql --quiet --file="$FILEDIR"/database/db_dumps/contours_schema.sql "$DBNAME" 
 
 # create contours shapefile and imports its data into the database
 echo "gdal_contour"

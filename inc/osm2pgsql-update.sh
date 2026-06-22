@@ -2,7 +2,7 @@
 
 pushd . > /dev/null
 
-DBNAME=gis
+DBNAME="${DBNAMES[classic]:-gis}"
 OSM2PGSQL=/usr/bin/osm2pgsql
 
 DIR="$INSTALLDIR"/import/osm2pgsql

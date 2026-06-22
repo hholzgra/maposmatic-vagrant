@@ -2,12 +2,14 @@
 
 pushd . > /dev/null
 
+DBNAME="${DBNAMES[classic]:-gis}"
+
 cd "$STYLEDIR"/OpenRailwayMap-CartoCSS
 
-sudo -u maposmatic psql gis --file=sql/osm_carto_views.sql
-sudo -u maposmatic psql gis --file=sql/functions.sql
-sudo -u maposmatic psql gis --file=sql/get_station_importance.sql
+sudo -u maposmatic psql $DBNAME --file=sql/osm_carto_views.sql
+sudo -u maposmatic psql $DBNAME --file=sql/functions.sql
+sudo -u maposmatic psql $DBNAME --file=sql/get_station_importance.sql
 
-sudo -u maposmatic psql gis --file="$INCDIR"/overlays/openrailway.sql
+sudo -u maposmatic psql $DBNAME --file="$INCDIR"/overlays/openrailway.sql
 
 popd > /dev/null
