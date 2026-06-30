@@ -2,7 +2,7 @@
 
 pushd . > /dev/null
 
-export DBNAME="${DBNAMES[flex]:-gis}"
+export DBNAME="${DBNAMES[classic]:-gis}"
 
 cd "$STYLEDIR"/OpenTopoMap
 
