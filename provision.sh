@@ -23,9 +23,13 @@ fi
 # here this can ony mean that the partition already has
 # been grown to full disk size earlier (in Vagrantfile)
 # so we accept error code 1 as OK, but not other codes
-growpart /dev/sda 1 && true || [ $? -eq 1 ]
+fs_dev=$(mount | grep "on / " | egrep -o "^[^ ]+")
+fs_base=$(echo $fs_dev | grep -E -o '.*[^0-9]')
+fs_part=$(echo $fs_dev | grep -E -o '[0-9]+$')
 
-resize2fs $(mount | grep "on / " | egrep -o "^[^ ]+")
+growpart $fs_base $fs_part && true || [ $? -eq 1 ]
+
+resize2fs $fs_dev
 df -h /
 
 
