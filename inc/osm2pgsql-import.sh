@@ -36,10 +36,11 @@ done
 echo "osm2pgsql cache size: $CacheSize"
 
 # import data
-time sudo --user=maposmatic /usr/bin/osm2pgsql \
+time sudo --user=maposmatic /opt/osm2pgsql-1.11/bin/osm2pgsql \
      --create \
      --slim \
      --database="$DBNAME" \
+     --middle-database-format=legacy \
      --merc \
      --hstore-all \
      --cache="$CacheSize" \
