@@ -1,6 +1,6 @@
 # maposmatic-vagrant
 
-Performs a full MapOsMatic installation in an Ubuntu "Focal" 20.04LTS VM using Vagrant and shell provisioning
+Performs a full MapOsMatic installation in a Debian 13 "Trixie" VM using Vagrant and shell provisioning
 
 ## Table of contents
 
