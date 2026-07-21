@@ -3,11 +3,12 @@
 # install extra npm packages
 banner "npm packages"
 
-echo "... setting up"
-( curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - ) > /dev/null
-
-echo "... installing nodejs package"
-sudo apt-get install --quiet=2 --assume-yes nodejs
+# install nodejs from upstream if not already available yet
+if ! which npm >/dev/null
+then
+    echo "... setting up"
+    ( curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash - ) > /dev/null
+fi
 
 npm config set loglevel warn
 
