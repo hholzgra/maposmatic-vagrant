@@ -48,9 +48,14 @@ do
   time $MAKEDB_CMD "$style" dataview
 
   echo "Creating $style stylefile"
+  # Patch the DB connection params into the generated style, and strip the
+  # Map background-color. Mapnik 4.0's cairo renderer clears its whole target
+  # to the Map background at render start, so a background-color on an overlay
+  # style wipes the base map it is composited over (even a transparent one).
   wmt-makedb "$style" mapstyle > "$style.xml"
   sed -i \
       -e 's|<Parameter name="type">postgis</Parameter>|<Parameter name="type">postgis</Parameter><Parameter name="host">gis-db</Parameter><Parameter name="user">maposmatic</Parameter><Parameter name="password">secret</Parameter>|g' \
+      -e 's| background-color="[^"]*"||' \
       "$style.xml"
 done
 
