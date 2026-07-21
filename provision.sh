@@ -41,7 +41,7 @@ df -h /
 
 if wget http://10.0.2.2/debian/pool/main/ --timeout=1 --tries=1 --quiet --output-file=/dev/null
 then
-	echo "deb http://10.0.2.2/debian bookworm main contrib non-free" > /etc/apt/sources.list
+	echo "deb http://10.0.2.2/debian trixie main contrib non-free" > /etc/apt/sources.list
 	apt-get update
 fi
 
