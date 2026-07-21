@@ -31,7 +31,7 @@ pip3 install --ignore-installed \
      feedparser \
      filelock \
      fiona \
-     "gdal==3.6.4" \
+     "gdal==$(gdal-config --version)" \
      GitPython \
      geoalchemy2 \
      geopy \
