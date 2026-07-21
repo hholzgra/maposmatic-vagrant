@@ -6,7 +6,7 @@
 #
 
 # VM box to start from
-BASE_BOX='debian/bookworm64'
+BASE_BOX='cloud-image/debian-13'
 
 # VM name
 VM_NAME='maposmatic'
@@ -70,6 +70,11 @@ Vagrant.configure(2) do |config|
     vb.name   = "#{VM_NAME}"
     vb.memory = "#{use_mem}"
     vb.cpus   = "#{use_cpus}"
+
+    # some vagrant base boxes have this turned off; we need to have it on
+    # as otherwise the gust will only have a single CPU core, regardless
+    # of the above vb.cpus setting
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
 
     override.vm.synced_folder ".", "/vagrant/", mount_options: ["dmode=777"]
     override.vm.synced_folder "test", "/vagrant/test", mount_options: ["dmode=777"]
