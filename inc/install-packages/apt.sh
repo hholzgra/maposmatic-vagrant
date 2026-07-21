@@ -13,7 +13,20 @@ export DEBIAN_FRONTEND=noninteractive
 
 # enable deb-src entries in apt sources list, needed for "apt build-dep"
 # and add "contrib" repos for stuff like ttf-mscorefonts-installer
-sed -i -e 's/^# deb-src/deb-src/g' -e's/main/main contrib/g' /etc/apt/sources.list
+# take both classic and deb822 formats into account
+# TODO: be more clever; less brutal force, about this
+if test -f /etc/apt/sources.list.d/debian.sources
+then
+    sed -i \
+        -e 's/^Components:.*/Components: main contrib non-free non-free-firmware/g' \
+        -e 's/^Types: deb$/Types: deb deb-src/g' \
+        /etc/apt/sources.list.d/debian.sources
+fi
+if test -s /etc/apt/sources.list
+then
+    sed -i -e 's/^# deb-src/deb-src/g' -e's/main/main contrib/g' /etc/apt/sources.list
+fi
+
 
 # bring apt package database up to date
 #
@@ -67,7 +80,7 @@ apt-get --quiet install --assume-yes \
     libcgi-fast-perl \
     libexpat1-dev \
     libffi-dev \
-    libfreetype6-dev \
+    libfreetype-dev \
     libjpeg-dev \
     libgdal-dev \
     libgirepository1.0-dev \
@@ -75,7 +88,7 @@ apt-get --quiet install --assume-yes \
     libldap-common \
     libldap2-dev \
     liblua5.3-dev \
-    libmapnik3.1 \
+    libmapnik4.0 \
     libmapnik-dev \
     libosmium2-dev \
     libpq-dev \
@@ -88,7 +101,6 @@ apt-get --quiet install --assume-yes \
     libxmlsec1-dev \
     libxslt1-dev \
     libyaml-dev \
-    libz-dev \
     lua5.3 \
     mapnik-utils \
     mc \
@@ -99,7 +111,9 @@ apt-get --quiet install --assume-yes \
     net-tools \
     neovim \
     nlohmann-json3-dev \
-    ntp \
+    nodejs \
+    npm \
+    ntpsec \
     ntpsec-ntpdate \
     osm2pgsql \
     osmctools \
@@ -115,12 +129,10 @@ apt-get --quiet install --assume-yes \
     poppler-utils \
     postgis \
     postgresql \
-    postgresql-contrib \
     postgresql-server-dev-all \
     pv \
     python-is-python3 \
     python3-dev \
-    python3-future \
     python3-gdbm \
     python3-gi-cairo \
     python3-mapnik \
@@ -147,6 +159,6 @@ apt-get --quiet install --assume-yes \
     vim \
     virtualenv \
     w3m \
-    wkhtmltopdf \
+    zlib1g-dev \
     > /dev/null || exit 3
 
