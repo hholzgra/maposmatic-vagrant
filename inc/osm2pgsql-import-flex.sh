@@ -61,6 +61,7 @@ sudo -u maposmatic ./scripts/get-external-data.py --database="$DBNAME"
 # build additional indes in parallel as per INSTALL.md
 ./scripts/indexes.py -0 | xargs -0 -P0 -I{} sudo -u maposmatic psql -d "$DBNAME" -c "{}"
 
+sudo -u maposmatic psql "$DBNAME" --file=common-values.sql
 sudo -u maposmatic psql "$DBNAME" --file=functions.sql
 
 # prepare for diff imports
