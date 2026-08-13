@@ -34,13 +34,6 @@ sed $sed_opts < "$FILEDIR"/config-files/maposmatic.wsgi > www/maposmatic.wsgi
 # copy static files from django applications
 python3 manage.py collectstatic --no-input
 
-# the Ghostery browser plugin only allows specific javascript files
-# to set cookie aceptance cookies, so we need to store the CookieLaw
-# script file under a known whitelisted name
-#
-# see also https://github.com/hholzgra/maposmatic-vagrant/issues/64
-(cd www/static/cookielaw/js; ln -s cookielaw.js eu_cookie_compliance.min.js)
-
 # create import bounds information
 cp "$INSTALLDIR"/bounds/bbox.py www/settings_bounds.py
 {
