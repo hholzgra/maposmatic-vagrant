@@ -11,6 +11,8 @@ echo " #    #  #          #            #       #    #   ####   #    #  #    #   
 # prevent configuration dialogs from popping up, we want fully automatic install
 export DEBIAN_FRONTEND=noninteractive
 
+echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/force-unsafe-io
+
 # enable deb-src entries in apt sources list, needed for "apt build-dep"
 # and add "contrib" repos for stuff like ttf-mscorefonts-installer
 # take both classic and deb822 formats into account
