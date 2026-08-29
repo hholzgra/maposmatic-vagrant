@@ -75,7 +75,7 @@ do
         cp "$cache_base"_warped.tif .
         echo -n "cached, "
     else
-        echo "gdalwarp -q -multi -of GTiff -co 'TILED=YES' -srcnodata 32767 -t_srs '+proj=merc +ellps=sphere +R=6378137 +a=6378137 +units=m' -rcs -order 3 -tr 30 30 -multi ${base}_adapted.tif ${base}_warped.tif" >> jobs-warped.txt
+        echo "gdalwarp -q -of GTiff -co 'TILED=YES' -srcnodata 32767 -t_srs '+proj=merc +ellps=sphere +R=6378137 +a=6378137 +units=m' -rcs -order 3 -tr 30 30 -multi ${base}_adapted.tif ${base}_warped.tif" >> jobs-warped.txt
         echo -n "planned, "
     fi
 
