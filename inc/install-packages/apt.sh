@@ -39,6 +39,8 @@ do
   sleep 3
 done
 
+apt-get install --assume-yes iotop strace
+
 # install needed extra deb pacakges
 apt-get --quiet install --assume-yes \
     apache2 \
