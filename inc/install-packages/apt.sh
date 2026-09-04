@@ -13,6 +13,13 @@ export DEBIAN_FRONTEND=noninteractive
 
 echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/force-unsafe-io
 
+# use local Debian mirror on host if we have one
+if wget http://10.0.2.2/debian/pool/main/ --timeout=1 --tries=1 --quiet --output-file=/dev/null
+then
+	echo "deb http://10.0.2.2/debian trixie main contrib non-free" > /etc/apt/sources.list
+	apt-get update
+fi
+
 # enable deb-src entries in apt sources list, needed for "apt build-dep"
 # and add "contrib" repos for stuff like ttf-mscorefonts-installer
 # take both classic and deb822 formats into account
@@ -29,7 +36,6 @@ then
     sed -i -e 's/^# deb-src/deb-src/g' -e's/main/main contrib/g' /etc/apt/sources.list
 fi
 
-
 # bring apt package database up to date
 #
 # recent Ubuntu base boxes seem to do perform some apt action on startup, too,
@@ -38,6 +44,12 @@ until apt-get update --quiet=2
 do
   sleep 3
 done
+
+# pre-seed apt package cache
+if test -d $CACHEDIR/apt
+then
+       cp -R $CACHEDIR/apt/* /var/cache/apt
+fi
 
 apt-get install --assume-yes iotop strace
 
@@ -165,4 +177,8 @@ apt-get --quiet install --assume-yes \
     w3m \
     zlib1g-dev \
     > /dev/null || exit 3
+
+# populate apt cache
+rm -rf $CACHEDIR/apt
+cp -R /var/cache/apt $CACHEDIR
 

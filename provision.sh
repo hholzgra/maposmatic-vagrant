@@ -35,20 +35,6 @@ df -h /
 
 #----------------------------------------------------
 #
-# use local Debian mirror on host if we have one
-#
-#----------------------------------------------------
-
-if wget http://10.0.2.2/debian/pool/main/ --timeout=1 --tries=1 --quiet --output-file=/dev/null
-then
-	echo "deb http://10.0.2.2/debian trixie main contrib non-free" > /etc/apt/sources.list
-	apt-get update
-fi
-
-
-
-#----------------------------------------------------
-#
 # add "maposmatic" system user
 #
 #----------------------------------------------------
@@ -181,12 +167,6 @@ then
     cp -rn $CACHEDIR/.ccache/ ~/
 else
     mkdir -p ~/.ccache
-fi
-
-# pre-seed apt package cache
-if test -d $CACHEDIR/apt
-then
-	cp -R $CACHEDIR/apt/* /var/cache/apt
 fi
 
 # sudo environment setup
@@ -364,6 +344,3 @@ banner "cleanup"
 # write back compiler cache
 cp -rn /root/.ccache $CACHEDIR
 
-# write back apt package cache
-rm -rf $CACHEDIR/apt
-cp -R /var/cache/apt $CACHEDIR
