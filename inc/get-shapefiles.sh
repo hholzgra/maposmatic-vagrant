@@ -28,6 +28,11 @@ mkdir -p "$DOWNLOAD_DIR"
 SHAPEFILE_DIR=${SHAPEFILE_DIR:-/home/maposmatic/shapefiles}
 mkdir -p "$SHAPEFILE_DIR"
 
+# we don't necessarily want to re-fetch shapefiles every time
+# they change (some of them are re-generated daily or even
+# more often), but only re-check after a certain minimum period
+SHAPEFILE_TTL=${SHAPEFILE_TTL:-"7 days"}
+
 #
 # base URLs for the different spapefile servers
 # and actual shapefiles to be downloaded from them
@@ -130,15 +135,19 @@ do
 	then
 	    # try go get from our own backup server
 	    echo $SAME_LINE "trying backup archive "
-            filename=$(basename "$url")
-	    if ! wget --quiet --timeout=30 --tries=1 https://get-map.org/downloads/shapefile-backups/"$filename"
+	    if ! wget --quiet --timeout=30 --tries=1 https://get-map.org/downloads/shapefile-backups/"$archive"
 	    then
 	        # could not find it in any of the known places
 		# -> skip further processing, continue with next shapefile in list
-		echo "skipping $filename"
+		echo "skipping $archive"
                 continue
             fi
 	fi
+    fi
+
+    if test -n "$SHAPEFILE_TTL"
+    then
+	touch -d "+$SHAPEFILE_TTL" $archive
     fi
 
     file_type=$(file -bi "$archive" | sed -e's/;.*$//g')
