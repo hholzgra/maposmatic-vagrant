@@ -79,6 +79,12 @@ Vagrant.configure(2) do |config|
     # of the above vb.cpus setting
     vb.customize ["modifyvm", :id, "--ioapic", "on"]
 
+    # some vagrant boxes do not have this enabled which affects file system
+    # performance drastically
+    # TODO: unfortunately the storage controller name is not easy to determine
+    # dynamically so for now it is hard coded for the current "cloud-image/debian-13" box
+    vb.customize ["storagectl", :id, "--name", "VirtIO Controller", "--hostiocache", "on"]
+
     override.vm.synced_folder ".", "/vagrant/", mount_options: ["dmode=777"]
     override.vm.synced_folder "test", "/vagrant/test", mount_options: ["dmode=777"]
   end
