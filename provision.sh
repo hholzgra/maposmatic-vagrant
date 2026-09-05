@@ -60,8 +60,9 @@ usermod --shell /bin/bash root
 usermod --shell /bin/bash vagrant
 
 useradd --create-home --shell /bin/bash maposmatic
-usermod -a -G www-data maposmatic
-
+usermod --append --groups www-data maposmatic
+usermod --append --groups maposmatic vagrant
+chmod -R a+rx /home/maposmatic
 
 #----------------------------------------------------
 #
