@@ -8,6 +8,9 @@ echo "deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude
 sudo apt update
 sudo apt install claude-code
 
-cp -Rp "$CACHEDIR"/dot-claude /home/vagrant
-mv /home/vagrant/dot-claude /home/vagrant/.claude
-chown -R vagrant:vagrant /home/vagrant/.claude
+if test -d "$CACHEDIR"/dot-claude
+then
+    cp -Rp "$CACHEDIR"/dot-claude /home/vagrant
+    mv /home/vagrant/dot-claude /home/vagrant/.claude
+    chown -R vagrant:vagrant /home/vagrant/.claude
+fi
