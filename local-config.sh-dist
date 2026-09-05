@@ -4,7 +4,7 @@
 #
 
 # whether to install the Weblate translation service instance
-WITH_WEBLATE=yes
+WITH_WEBLATE=no
 
 # whether to install a local tile server
 WITH_TILESERVER=yes
