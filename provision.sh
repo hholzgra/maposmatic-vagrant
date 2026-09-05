@@ -19,6 +19,24 @@ fi
 #
 #----------------------------------------------------
 
+# first we need to make szre we have the necessary
+# tools already available; if not we need to do an
+# early apt-get install ahead of later full pkg install
+PKGS=""
+if ! which -s growpart
+then
+	PKGS="$PKGS cloud-guest-utls"
+fi
+if ! which resize2fs
+then
+	PKGS="$PKGS e2fsprogs"
+fi
+if test -n "$PKGS"
+then
+	apt-get update
+	apt-get install -y $PKGS"
+fi
+
 # growpart returns exit code 1 when not having enough space
 # here this can ony mean that the partition already has
 # been grown to full disk size earlier (in Vagrantfile)
@@ -38,7 +56,10 @@ df -h /
 # add "maposmatic" system user
 #
 #----------------------------------------------------
-useradd --create-home maposmatic
+usermod --shell /bin/bash root
+usermod --shell /bin/bash vagrant
+
+useradd --create-home --shell /bin/bash maposmatic
 usermod -a -G www-data maposmatic
 
 
