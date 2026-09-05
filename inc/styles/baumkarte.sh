@@ -18,7 +18,7 @@ cd baumkarte
 
 ln -s "$SHAPEFILE_DIR" data
 
-sed -i -e 's/dbname: "gis"/dbname: "osm2pgsql"/g' project.mml
+sed -i -e 's/dbname: "gis"/dbname: "osm2pgsql_flex"/g' project.mml
 # patch -p1 < "$INCDIR"/styles/baumkarte.patch
 carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" project.mml > baumkarte.xml
 php "$FILEDIR"/tools/postprocess-style.php baumkarte.xml
