@@ -59,7 +59,10 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 8080, host: WEBLATE_HOST_PORT
   config.vm.network "forwarded_port", guest: 8090, host: UMAP_HOST_PORT
 
-  config.vbguest.auto_update = false
+
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = false
+  end
 
   config.vm.boot_timeout = 600
   config.ssh.forward_agent = true
@@ -90,10 +93,6 @@ Vagrant.configure(2) do |config|
     config.cache.synced_folder_opts = {
       owner: "_apt"
     }
-  end
-
-  unless Vagrant.has_plugin?("vagrant-vbguest")
-    raise 'vbguest plugin is not installed - run "vagrant plugin install vagrant-vbguest" first'
   end
 
   unless Vagrant.has_plugin?("vagrant-disksize")
