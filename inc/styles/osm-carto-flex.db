@@ -1,0 +1,7 @@
+#! /bin/bash
+
+pushd . > /dev/null
+
+cd "$STYLEDIR"/openstreetmap-carto-flex
+
+sudo -u maposmatic psql "osm2pgsql_flex" --file=functions.sql
