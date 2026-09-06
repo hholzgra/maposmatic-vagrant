@@ -34,7 +34,7 @@ fi
 if test -n "$PKGS"
 then
 	apt-get update
-	apt-get install -y $PKGS"
+	apt-get install -y "$PKGS"
 fi
 
 # growpart returns exit code 1 when not having enough space
