@@ -12,7 +12,7 @@ git clone --quiet https://github.com/nobohan/OpenArdenneMap
 cd OpenArdenneMap
 
 mkdir contour
-mkdir hillshade
+mkdir -p hillshade/data
 mkdir downloads
 
 cd downloads
@@ -25,10 +25,10 @@ cd ..
 
 wget http://opendata.champs-libres.be/hillshade_belgium.zip
 unzip hillshade_belgium.zip
-mv dem*hillshade*.tif ../hillshade/hillshade.tif
+mv dem_be_10x10_hillshade_semi_transparent.tif ../hillshade/data/dem_be_10x10_hillshade_semi_transparent_3857.tif
 
 cd ../contour/
-mmv 'beautiful-contour-belgium.*' 'contours_3857.#1'
+mmv 'beautiful-contour-belgium.*' 'beautiful_contour_belgium_3857.#1'
 
 cd ../osm2pgsql
 
@@ -41,5 +41,7 @@ sed -i \
 carto --quiet --api "$MAPNIK_VERSION_FOR_CARTO" project.mml > OpenArdenneMap.xml
 
 php "$FILEDIR"/tools/postprocess-style.php OpenArdenneMap.xml
+
+sed -i -e 's|\.\./\.\./\.\./Data||g' OpenArdenneMap.xml
 
 popd > /dev/null
