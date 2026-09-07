@@ -73,6 +73,7 @@ SELECT osm_id
 , tags->'orchard' as "orchard"
 , tags->'otm_isolation' as "otm_isolation"
 , tags->'place' as "place"
+, tags->'plant' as "plant"
 , tags->'power' as "power"
 , tags->'power_source' as "power_source"
 , tags->'produce' AS "produce"
