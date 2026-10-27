@@ -3,7 +3,7 @@
 #
 # Health Overlay style
 #
-# Original on https://github.com/rweait/Mapnik-health-overlay
+# Original on https://github.com/hholzgra/Mapnik-health-overlay
 #
 #----------------------------------------------------
 

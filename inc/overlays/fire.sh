@@ -3,7 +3,7 @@
 #
 # Fire/Emergency overlay
 #
-# Original on https://github.com/rweait/Mapnik-fire-overlay
+# Original on https://github.com/hholzgra/Mapnik-fire-overlay
 #
 #----------------------------------------------------
 
