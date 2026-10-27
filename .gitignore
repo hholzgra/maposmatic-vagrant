@@ -49,6 +49,10 @@ db_disk.vdi
 # ignore local config file
 local-config.sh
 
+# ignore local packages
+files/install-local/*.deb
+files/install-local/*.whl
+
 # ignore OSM data files
 *.pbf
 
