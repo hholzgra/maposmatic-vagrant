@@ -117,6 +117,7 @@ apt-get --quiet install --assume-yes \
     libxmlsec1-dev \
     libxslt1-dev \
     libyaml-dev \
+    locales-all \
     lua5.3 \
     mapnik-utils \
     mc \
