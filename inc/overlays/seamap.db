@@ -1,0 +1,14 @@
+#! /bin/bash -e
+
+pushd . > /dev/null
+
+DBNAME="${DBNAMES[flex]:-osm2pgsql_flex}"
+
+cd "$STYLEDIR"/mapnik-seamap-overlay
+
+for f in sql-functions/*.sql
+do
+    sudo -u maposmatic psql "$DBNAME" --file="$f"
+done
+
+popd > /dev/null
