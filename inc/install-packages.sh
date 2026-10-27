@@ -18,3 +18,5 @@
 
 . "$INCDIR"/install-packages/misc.sh
 
+. "$INCDIR"/install-packages/local.sh
+
